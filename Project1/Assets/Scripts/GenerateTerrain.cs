@@ -28,7 +28,8 @@ public class GenerateTerrain : MonoBehaviour
     private MeshFilter meshFilter;
 
     // Variables.
-    private Vector3[,] vertices;
+    private Node[,] nodes;
+    private bool onDiamondStep;
 
     // Use this for initialization
 	void Start ()
@@ -47,29 +48,30 @@ public class GenerateTerrain : MonoBehaviour
 	    distBetweenNodes = (float) sideLength / numNodesPerSide;
 
         // Create the terrain.
-	    GenerateVertices(); // Create the vertices for the terrain and place them.
+	    GenerateNodes(); // Create the nodes/vertices for the terrain and place them.
         GenerateMesh(meshFilter.mesh); // Create the mesh for the terrain
 
         Debug.Log(string.Format("numNodesPerSide: {0}, distBetweenNodes: {1}", numNodesPerSide, distBetweenNodes));
 	}
 
     /**
-     * This creates the 2D data structure to contain the vertices for the terrain.
+     * This creates the 2D data structure to contain the nodes for the terrain.
      * It does *not* initialize the corners.
      */
-    private void GenerateVertices()
+    private void GenerateNodes()
     {
-        vertices = new Vector3[numNodesPerSide, numNodesPerSide];
+        nodes = new Node[numNodesPerSide, numNodesPerSide];
         for (int z = 0; z < numNodesPerSide; z++)
         {
             for (int x = 0; x < numNodesPerSide; x++)
             {
-                vertices[x,z] = new Vector3(x * distBetweenNodes, 0, z * distBetweenNodes);
-                
+                nodes[x, z] = new Node();
+                nodes[x, z].pos = new Vector3(x * distBetweenNodes, 0, z * distBetweenNodes);
+
                 // If the vertex is a corner, initiate its corner heights.
                 if (isCorner(x, z))
                 {
-                    vertices[x,z].y = Random.Range(minCornerHeight, maxCornerHeight);
+                    nodes[x,z].pos.y = Random.Range(minCornerHeight, maxCornerHeight);
                 }
             }
         }
@@ -82,7 +84,7 @@ public class GenerateTerrain : MonoBehaviour
     }
 
     /**
-     * Flatten the 2D vertices structure into 1D.
+     * Flatten the 2D nodes structure into 1D.
      * This will make it suppliable to the mesh.
      */
     private void SetMeshVertices(Mesh mesh)
@@ -91,7 +93,7 @@ public class GenerateTerrain : MonoBehaviour
 
         for (int z = 0, v = 0; z < numNodesPerSide; z++) {
             for (int x = 0; x < numNodesPerSide; x++, v++) {
-                flatVertices[v] = vertices[x, z];
+                flatVertices[v] = nodes[x, z].pos;
             }
         }
 
@@ -113,18 +115,45 @@ public class GenerateTerrain : MonoBehaviour
         mesh.triangles = triangles;
     }
 
-    /**
-     * Takes the private 2D field 'vertices' and sets the mesh equal to them.
-     * OR can we have the mesh point directly to the Vector3s inside 'vertices' so it's not required?
-     */
-    private void UpdateVertices()
+    private void PerformDSIteration()
     {
-        return;
+        // Calculate step size to neighbors
+        // Half step size every DS-iteration (i.e. after both diamond and square step)
+        // nodes[x + halfStep, z + halfStep] during diamond step
+        // e.g. nodes[x, z + halfStep] during square step
+        // How to know which nodes to expand from?
+        PerformDiamondStep();
+        PerformSquareStep();
     }
 
+    private void PerformDiamondStep()
+    {
+        if (!onDiamondStep)
+        {
+            // We're not on the diamond step i.e. we've performed one
+            // already, and should be doing a square step.
+            return;
+        }
+
+
+
+        onDiamondStep = false;
+    }
+
+    private void PerformSquareStep()
+    {
+        if (onDiamondStep) {
+            // We're not on the square step i.e. we've performed one
+            // already, and should be doing a diamond step.
+            return;
+        }
+
+        onDiamondStep = true;
+    }
+    
     /**
      * Based on the supplied coordinates, determines if it would correspond to a
-     * corner node in the 2D 'vertices' structure.
+     * corner node in the 2D 'nodes' structure.
      */
     private bool isCorner(int x, int z)
     {
@@ -135,14 +164,14 @@ public class GenerateTerrain : MonoBehaviour
     }
 
     private void OnDrawGizmos() {
-        if (vertices == null) {
+        if (nodes == null) {
             return;
         }
 
         Gizmos.color = Color.black;
         for (int z = 0; z < numNodesPerSide; z++) {
             for (int x = 0; x < numNodesPerSide; x++) {
-                Gizmos.DrawSphere(vertices[x,z], 0.1f);
+                Gizmos.DrawSphere(nodes[x,z].pos, 0.1f);
             }
         }
     }

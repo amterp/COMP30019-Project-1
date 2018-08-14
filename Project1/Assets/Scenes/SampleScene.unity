@@ -207,8 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f8763d7d469334db344b6e1494b469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  n: 3
-  sideLength: 7
+  n: 5
+  sideLength: 80
   seed: 2
   maxCornerHeight: 5
   minCornerHeight: 0
