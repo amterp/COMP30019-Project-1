@@ -5,6 +5,7 @@ using UnityEngine;
 public class FlyingCamera : MonoBehaviour {
 
     public float movementSpeed;
+    public float sprintMultiplier;
     public float xLookSensitivity;
     public float yLookSensitivity;
 
@@ -15,7 +16,8 @@ public class FlyingCamera : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         PerformCameraRotation();
         PerformCameraTranslation();
     }
@@ -46,7 +48,13 @@ public class FlyingCamera : MonoBehaviour {
         movement += Input.GetKey(KeyCode.S) ? -transform.forward : Vector3.zero;
         movement += Input.GetKey(KeyCode.D) ? transform.right : Vector3.zero;
 
+        // Ensure that the base movement speed is == movementSpeed.
+        movement = movement.normalized * movementSpeed;
+
+        // Take into account sprinting, if necessary.
+        movement *= Input.GetKey(KeyCode.LeftShift) ? sprintMultiplier : 1;
+
         // Translate the camera.
-        transform.position += movement.normalized * movementSpeed * Time.deltaTime;
+        transform.position += movement * Time.deltaTime;
     }
 }

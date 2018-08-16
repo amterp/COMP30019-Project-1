@@ -301,6 +301,7 @@ MonoBehaviour:
   movementSpeed: 8
   xLookSensitivity: 16
   yLookSensitivity: 16
+  rollingSpeed: 45
 --- !u!135 &240373537
 SphereCollider:
   m_ObjectHideFlags: 0
