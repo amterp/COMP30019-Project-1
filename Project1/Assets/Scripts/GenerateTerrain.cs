@@ -87,6 +87,7 @@ public class GenerateTerrain : MonoBehaviour {
         // Calculate the mesh's normals and tangents, to allow for proper lighting
         meshFilter.mesh.RecalculateNormals();
         meshFilter.mesh.RecalculateTangents();
+        meshFilter.mesh.RecalculateBounds();
     }
 
     /**
