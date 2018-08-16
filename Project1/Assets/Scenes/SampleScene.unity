@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1
-  sprintMultiplier: 10
+  sprintMultiplier: 12
   xLookSensitivity: 16
   yLookSensitivity: 16
 --- !u!135 &240373537
