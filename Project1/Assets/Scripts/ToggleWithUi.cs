@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ToggleWithUi : MonoBehaviour
 {
+    public bool beginEnabled = true;
     // This can be set to true if this game object should be disabled
     // when the UI is enabled, and visa versa.
     public bool invert = false;
@@ -12,6 +13,8 @@ public class ToggleWithUi : MonoBehaviour
 	void Start () {
 		// Subscribe to the toggle event.
 	    GameController.uiToggleEvent += OnUiToggle;
+
+        gameObject.SetActive(beginEnabled);
 	}
 
     /**
