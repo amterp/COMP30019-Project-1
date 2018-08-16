@@ -1,0 +1,10 @@
+Alexander Terp
+Student ID: 828791
+Contributions:
+	- Broke specification down into chunk-sized GitHub issues.
+	- Implemented diamond-square algorithm for terrain generation.
+	- Implemented camera / flying vehicle as specified.
+
+Samuel Xu
+Student ID: 
+Contributions:
