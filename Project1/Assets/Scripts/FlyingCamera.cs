@@ -11,8 +11,10 @@ public class FlyingCamera : MonoBehaviour {
 
     void Start() {
         // Lock the cursor to the application and hide the cursor.
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        OnUiToggle(false);
+
+        // Register with the GameController's UiToggle observer list.
+        GameController.uiToggleEvent += OnUiToggle;
     }
 
     // Update is called once per frame
@@ -26,6 +28,12 @@ public class FlyingCamera : MonoBehaviour {
      * Takes care of the camera rotation, based on mouse movement.
      */
     private void PerformCameraRotation() {
+        // If the UI is enabled, we do not want mouse movements rotating the camera.
+        if (GameController.uiEnabled)
+        {
+            return;
+        }
+
         // Get values for how much the axes have moved this frame.
         float xRotationAmount = Input.GetAxis("Mouse X") * xLookSensitivity;
         float yRotationAmount = Input.GetAxis("Mouse Y") * yLookSensitivity;
@@ -56,5 +64,15 @@ public class FlyingCamera : MonoBehaviour {
 
         // Translate the camera.
         transform.position += movement * Time.deltaTime;
+    }
+
+    /**
+     * Called when UI is toggled in GameController. Ensures that the cursor becomes
+     * visible and unlocked from the center of the screen.
+     */
+    private void OnUiToggle(bool uiEnabled)
+    {
+        Cursor.lockState = uiEnabled ? CursorLockMode.Confined : CursorLockMode.Locked;
+        Cursor.visible = uiEnabled;
     }
 }
