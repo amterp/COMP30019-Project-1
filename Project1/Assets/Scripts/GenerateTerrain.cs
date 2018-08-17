@@ -71,7 +71,8 @@ public class GenerateTerrain : MonoBehaviour {
         numNodes = numNodesPerSide * numNodesPerSide;
 
         // The actual in-Unity distance between nodes.
-        distBetweenNodes = (float)sideLength / numNodesPerSide;
+        // TODO: the -1 is required to make the size properly match 'sideLength'. That's a bit weird.
+        distBetweenNodes = (float)sideLength / (numNodesPerSide - 1);
         Debug.Log(string.Format("numNodesPerSide: {0}, distBetweenNodes: {1}", numNodesPerSide, distBetweenNodes));
 
         // Calculate the terrain.
