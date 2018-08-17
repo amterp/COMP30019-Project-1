@@ -373,7 +373,7 @@ MonoBehaviour:
   minCornerHeight: 0
   maxHeightAddition: 4
   minHeightAddition: -4
-  heightAdditionFactor: 0.5
+  heightAdditionFactor: 0.46
 --- !u!4 &204458223
 Transform:
   m_ObjectHideFlags: 0
