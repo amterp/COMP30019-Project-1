@@ -17,11 +17,11 @@ public class TerrainUtilities {
         // Complete this in one pass and return as an array to save time
         foreach (float node in map)
         { 
-            if ((maxNode == null) || (node > maxNode))
+            if ((node > maxNode))
             {
                 maxNode = node;
             }
-            if ((minNode == null) || (node < minNode))
+            if ((node < minNode))
             {
                 minNode = node;
             }

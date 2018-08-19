@@ -96,10 +96,12 @@ public class GenerateTerrain : MonoBehaviour {
         meshFilter.mesh.RecalculateNormals();
         meshFilter.mesh.RecalculateTangents();
         meshFilter.mesh.RecalculateBounds();
-
+        
         // Set the height of the water plane (in the middle of the highest and lowest point of the terrain)
         SetWaterHeight(heights);
         
+        // Generate a collision mesh.
+        gameObject.AddComponent<MeshCollider>();
     }
 
     /**

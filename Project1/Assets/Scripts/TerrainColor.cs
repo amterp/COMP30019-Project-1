@@ -20,9 +20,9 @@ public class TerrainColor : MonoBehaviour {
     public float waterHeight = 10;
     public float mountainHeight = 12;
     public float snowHeight = 15;
-    public float waterBufferZone = 2;
-    public float mountainBufferZone = 2;
-    public float snowBufferZone = 2;
+    public float waterBufferZone = 0;
+    public float mountainBufferZone = 0;
+    public float snowBufferZone = 0;
 
     // Use Water Plane Height?
     public bool useWaterPlaneHeight = false;
