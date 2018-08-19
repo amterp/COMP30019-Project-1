@@ -4,11 +4,14 @@ Contributions:
 	- Broke specification down into chunk-sized GitHub issues.
 	- Implemented diamond-square algorithm for terrain generation.
 	- Implemented camera / flying vehicle as specified.
+	- Implemented sun model and gradual sun/lighting movement.
 	- Extra: Added "extra" issues onto GitHub that would be fun to add to the project.
 	- Extra: Enhanced camera control with "sprinting" ability.
 	- Extra: Implemented UI support with "ESC" key.
 	- Extra: Implemented a functional Generate New Terrain button to the UI.
 	- Extra: Implemented application exit button.
+	- Extra: Implemented full day/night cycle.
+	- Extra: Implemented fov slider.
 
 Samuel Xu
 Student ID: 
