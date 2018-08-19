@@ -9,20 +9,31 @@ public class SetTime : MonoBehaviour
     public InputField hourInput;
     public InputField minuteInput;
     public InputField secondInput;
-    public Button setTimeButton;
+    public Button setInputTimeButton;
+    public Button setRealTimeButton;
     public GameTime gameTime;
 
 	// Use this for initialization
 	void Start () {
-        // Subscribe to the button click event.
-		setTimeButton.onClick.AddListener(OnSetTimeClick);
+        // Subscribe to the button click events.
+		setInputTimeButton.onClick.AddListener(OnSetInputTimeClick);
+        setRealTimeButton.onClick.AddListener(OnSetRealTimeClick);
 	}
 
     /**
-     * Called then the "set time" button is clicked. This will read input
-     * from the input fields and update the time o
+     * Called then the "set real time" button is clicked. This will set
+     * the time in the simulation to the real time on the computer.
      */
-    private void OnSetTimeClick()
+    private void OnSetRealTimeClick()
+    {
+        gameTime.SetTime(DateTime.Now);
+    }
+
+    /**
+     * Called then the "set input time" button is clicked. This will read the numbers
+     * from the input fields and update the time accordingly.
+     */
+    private void OnSetInputTimeClick()
     {
         int hour = ReadInput(hourInput);
         int minute = ReadInput(minuteInput);
