@@ -62,7 +62,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HeightMax: 50
+    - _HeightMax: 20
     - _HeightMin: 0
     - _Level2: 100
     - _Level3: 200
@@ -80,7 +80,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0, g: 0.3529412, b: 0.017657658, a: 1}
-    - _ColorMax: {r: 1, g: 0.7607844, b: 0, a: 1}
+    - _ColorMax: {r: 1, g: 1, b: 1, a: 1}
     - _ColorMin: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Level1Color: {r: 0.65, g: 0.86, b: 0.63, a: 1}

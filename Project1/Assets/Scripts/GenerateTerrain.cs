@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditorInternal;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -37,6 +38,9 @@ public class GenerateTerrain : MonoBehaviour {
     private int numNodes;
     private MeshFilter meshFilter;
 
+    // Water Plane object for reference
+    public GameObject waterPlane; 
+
     // Variables.
 
     // This structure will contain the nodes/vertices for the terrain.
@@ -59,8 +63,11 @@ public class GenerateTerrain : MonoBehaviour {
     // go when looking for neighbors in each step.
     private int matrixJumpSize;
 
+    // Heights of our terrain
+    private float[,] heights;
+
     // Use this for initialization
-    void Start() {
+    void Awake() {
         // Grab references to components.
         meshFilter = GetComponent<MeshFilter>();
 
@@ -76,7 +83,7 @@ public class GenerateTerrain : MonoBehaviour {
         Debug.Log(string.Format("numNodesPerSide: {0}, distBetweenNodes: {1}", numNodesPerSide, distBetweenNodes));
 
         // Calculate the terrain.
-        float[,] heights = DiamondSquare.GetHeights(seed, n, minCornerHeight, maxCornerHeight, minHeightAddition,
+        heights = DiamondSquare.GetHeights(seed, n, minCornerHeight, maxCornerHeight, minHeightAddition,
             maxHeightAddition,
             heightAdditionFactor);
         CreateVertices(heights); // Create the nodes/vertices for the terrain and place them.
@@ -89,6 +96,10 @@ public class GenerateTerrain : MonoBehaviour {
         meshFilter.mesh.RecalculateNormals();
         meshFilter.mesh.RecalculateTangents();
         meshFilter.mesh.RecalculateBounds();
+
+        // Set the height of the water plane (in the middle of the highest and lowest point of the terrain)
+        SetWaterHeight(heights);
+        
     }
 
     /**
@@ -102,6 +113,24 @@ public class GenerateTerrain : MonoBehaviour {
                 nodes[x, z] = new Node(new Vector3(x * distBetweenNodes, heights[x, z], z * distBetweenNodes));
             }
         }
+    }
+
+    /**
+     * Set Height of water plane. This should be set at 50% of the highest point.
+     */
+    private void SetWaterHeight(float[,] heights)
+    {
+        // Get our highest and lowest points on the map
+        float[] minMaxNodes = TerrainUtilities.GetMinMaxNodes(heights);
+        float min = minMaxNodes[0];
+        float max = minMaxNodes[1];
+
+        // Set our water height
+        float waterHeight = (max + min) / 2;
+        Vector3 localPos = waterPlane.transform.localPosition;
+        localPos.y = waterHeight;
+
+        waterPlane.transform.position = localPos;
     }
 
     /**

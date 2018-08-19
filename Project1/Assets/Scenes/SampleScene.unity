@@ -371,6 +371,11 @@ MonoBehaviour:
   seed: 21
   maxCornerHeight: 20
   minCornerHeight: 0
+  sandColor: {r: 0.745283, g: 0.71801287, b: 0.6433339, a: 0}
+  defaultColor: {r: 0.031236582, g: 0.4716981, b: 0.006674961, a: 0}
+  mountainColor: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 0}
+  waterHeight: 15
+  mountainHeight: 17
   maxHeightAddition: 4
   minHeightAddition: -4
   heightAdditionFactor: 0.46
