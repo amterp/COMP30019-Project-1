@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class FieldOfViewSlider : MonoBehaviour
 {
     // The camera which will have its fov changed.
-    public Camera camera;
+    public Camera cam;
 
     // The slider which will determine/change the fov.
     public Slider slider;
@@ -31,7 +31,7 @@ public class FieldOfViewSlider : MonoBehaviour
      */
     private void OnSliderChange(float newValue)
     {
-        camera.fieldOfView = newValue;
+        cam.fieldOfView = newValue;
         UpdateFovCounterText(newValue);
     }
 
