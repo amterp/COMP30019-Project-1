@@ -89,6 +89,9 @@ public class GenerateTerrain : MonoBehaviour {
         meshFilter.mesh.RecalculateNormals();
         meshFilter.mesh.RecalculateTangents();
         meshFilter.mesh.RecalculateBounds();
+
+        // Generate a collision mesh.
+        gameObject.AddComponent<MeshCollider>();
     }
 
     /**

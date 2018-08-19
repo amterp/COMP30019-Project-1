@@ -9,7 +9,12 @@ public class FlyingCamera : MonoBehaviour {
     public float xLookSensitivity;
     public float yLookSensitivity;
 
+    private Rigidbody rigidbody;
+
     void Start() {
+        // Get a reference to the camera's rigidbody.
+        rigidbody = GetComponent<Rigidbody>();
+
         // Lock the cursor to the application and hide the cursor.
         OnUiToggle(false);
 
@@ -62,8 +67,9 @@ public class FlyingCamera : MonoBehaviour {
         // Take into account sprinting, if necessary.
         movement *= Input.GetKey(KeyCode.LeftShift) ? sprintMultiplier : 1;
 
-        // Translate the camera.
-        transform.position += movement * Time.deltaTime;
+        // Set the camera's velocity. No * Time.deltaTime required because
+        // velocity is already "per second".
+        rigidbody.velocity = movement;
     }
 
     /**

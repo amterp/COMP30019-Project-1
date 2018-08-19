@@ -8,6 +8,7 @@ Contributions:
 	- Extra: Enhanced camera control with "sprinting" ability.
 	- Extra: Implemented UI support with "ESC" key.
 	- Extra: Implemented a functional Generate New Terrain button to the UI.
+	- Extra: Implemented application exit button.
 
 Samuel Xu
 Student ID: 
