@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 981ec04bae520cc429d32b4c7b837337, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 3fb4d756747a57c4a9f495c4219c09ff, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1839294923}
-  m_IndirectSpecularColor: {r: 0.0035044113, g: 0.00019112827, b: 0.000000042849948,
+  m_IndirectSpecularColor: {r: 0.0035044071, g: 0.00019112794, b: 0.000000042849948,
     a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 84163313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a7d5ec9c4a918646ad1f64f56bfb9fb, type: 3}
+  m_Script: {fileID: 11500000, guid: e7fcf3b37fb5abe49b20c407fc2bca76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   beginEnabled: 0
@@ -724,13 +724,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 204458221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31a38d1aacefbb8459f8b2acdcdf2e56, type: 3}
+  m_Script: {fileID: 11500000, guid: cfb727b9122f74d40a29918e12f403dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sandColor: {r: 0.5377358, g: 0.51509845, b: 0.41344783, a: 0}
+  sandColor: {r: 0.8867924, g: 0.8332593, b: 0.5898006, a: 0}
   snowColor: {r: 1, g: 1, b: 1, a: 0}
-  defaultColor: {r: 0.1295291, g: 0.31132078, b: 0.08957814, a: 0}
-  mountainColor: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 0}
+  defaultColor: {r: 0.044906013, g: 0.41509432, b: 0, a: 0}
+  mountainColor: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 0}
   waterHeight: 10
   mountainHeight: 12
   snowHeight: 15
@@ -862,7 +862,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 224557156}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e870e6fc65ffc984fa41cb71597cc843, type: 3}
+  m_Script: {fileID: 11500000, guid: a71ef5b8a59205442b7d25b1c691556c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hourInput: {fileID: 2005436106}
@@ -879,7 +879,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 224557156}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a7d5ec9c4a918646ad1f64f56bfb9fb, type: 3}
+  m_Script: {fileID: 11500000, guid: e7fcf3b37fb5abe49b20c407fc2bca76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   beginEnabled: 0
@@ -1874,7 +1874,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 792700135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ec87e9b50a8da24c970b63f6294f383, type: 3}
+  m_Script: {fileID: 11500000, guid: 85854e553912c9d41b8c88d187c6c0ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameTime: {fileID: 2034944003}
@@ -1925,7 +1925,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 923692501}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9d940b9a8a57e04496a563f2c180955, type: 3}
+  m_Script: {fileID: 11500000, guid: 71158d1e12d7fd84cbd41f371ddca9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &923692504
@@ -2259,7 +2259,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 8ef0073a424089045ad20e497c18116e, type: 2}
+  - {fileID: 2100000, guid: 74df26efc270d1c47a867214bb61e0c4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7049,7 +7049,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1074333384}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb56a6c6e044b3f4194a0ee2ea3d1c3c, type: 3}
+  m_Script: {fileID: 11500000, guid: 87b15e8f9fa660047a2e6faf67e7e279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameTime: {fileID: 2034944003}
@@ -7063,7 +7063,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1074333384}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a7d5ec9c4a918646ad1f64f56bfb9fb, type: 3}
+  m_Script: {fileID: 11500000, guid: e7fcf3b37fb5abe49b20c407fc2bca76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   beginEnabled: 0
@@ -7644,7 +7644,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1303375110}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63970b87a05bd544dbc0784c79df80f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e91c98ba59250142b24ea03a739f8a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentTerrainObject: {fileID: 204458221}
@@ -7778,7 +7778,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: c2cd84b2c1ee80044864176000ba86bb, type: 3}
+    m_Font: {fileID: 12800000, guid: de389ca962c0306479c30036296bb6d4, type: 3}
     m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
@@ -8600,7 +8600,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1685991728}
-  - component: {fileID: 1685991729}
+  - component: {fileID: 1685991730}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -8627,7 +8627,7 @@ RectTransform:
   m_AnchoredPosition: {x: -20, y: -20}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &1685991729
+--- !u!114 &1685991730
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -8635,7 +8635,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1685991727}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a7d5ec9c4a918646ad1f64f56bfb9fb, type: 3}
+  m_Script: {fileID: 11500000, guid: e7fcf3b37fb5abe49b20c407fc2bca76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   beginEnabled: 0
@@ -8759,7 +8759,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 21cf51d1db2e95a45b1807f51e6afaf8, type: 2}
+  - {fileID: 2100000, guid: 0ceb2cf5d4a1082438054c14681f2471, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9495,7 +9495,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2034944000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0fe7e3827d73274e8eeadf14592340d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c134b93a5dd9024f8aa94800e432950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameTime: {fileID: 2034944003}
@@ -9523,7 +9523,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2034944000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c29947895859cf4981a04fb50aa911a, type: 3}
+  m_Script: {fileID: 11500000, guid: a350f118a32902943adeea7d04b6afe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeProgression: 1
@@ -9574,7 +9574,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2042301201}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a7d5ec9c4a918646ad1f64f56bfb9fb, type: 3}
+  m_Script: {fileID: 11500000, guid: e7fcf3b37fb5abe49b20c407fc2bca76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   beginEnabled: 0
@@ -9794,7 +9794,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2096716818}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a7d5ec9c4a918646ad1f64f56bfb9fb, type: 3}
+  m_Script: {fileID: 11500000, guid: e7fcf3b37fb5abe49b20c407fc2bca76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   beginEnabled: 0
@@ -9807,7 +9807,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2096716818}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f5488f1212a68843a091e177c1c8ed9, type: 3}
+  m_Script: {fileID: 11500000, guid: 586575d71a150f143b9789d7bac6b481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 282840813}
