@@ -10,8 +10,11 @@ Contributions:
 	- Extra: Implemented UI support with "ESC" key.
 	- Extra: Implemented a functional Generate New Terrain button to the UI.
 	- Extra: Implemented application exit button.
+<<<<<<< HEAD
+=======
 	- Extra: Implemented full day/night cycle.
 	- Extra: Implemented fov slider.
+>>>>>>> 521fa720ef24cfc4a1f8a489711f7ec8d2650add
 
 Samuel Xu
 Student ID: 
