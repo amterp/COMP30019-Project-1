@@ -5,18 +5,16 @@ using UnityEngine.UI;
 
 public class GenerateTerrainButton : MonoBehaviour
 {
-    // A reference to the current terrain object.
-    public GameObject terrainObject;
-
     // A reference to the actual button that will be pressed to trigger
     // script.
-    private Button button;
+    public Button button;
+    // A reference to the current terrain object.
+    public GameObject terrainObject;
 
 	// Use this for initialization
 	void Start ()
 	{
         // Define the button's functionality when pressed.
-	    button = GetComponent<Button>();
         button.onClick.AddListener(GenerateTerrain);
 	}
 
