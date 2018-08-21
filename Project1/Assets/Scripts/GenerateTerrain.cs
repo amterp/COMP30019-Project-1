@@ -122,12 +122,12 @@ public class GenerateTerrain : MonoBehaviour {
     private void SetWaterHeight(float[,] heights)
     {
         // Get our highest and lowest points on the map
-        float[] minMaxNodes = TerrainUtilities.GetMinMaxNodes(heights);
+        float[] minMaxNodes = Utilities.GetMinMaxNodes(heights);
         float min = minMaxNodes[0];
         float max = minMaxNodes[1];
 
         // Set our water height
-        float waterHeight = (max + min) / 2;
+        float waterHeight = (min + max) / 2;
         Vector3 localPos = waterPlane.transform.localPosition;
         localPos.y = waterHeight;
 
