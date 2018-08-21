@@ -15,7 +15,6 @@ public class GameTime : MonoBehaviour {
 
     // Constants.
 
-    [HideInInspector]
     public const int SecondsPerMinute = 60;
     public const int MinutesPerHour = 60;
     public const int HoursPerDay = 24;
@@ -65,17 +64,19 @@ public class GameTime : MonoBehaviour {
         SetTime(time.Hour, time.Minute, time.Second);
     }
 
+    /**
+     * Returns the current in-game time a DateTime object. Only hour, minute, and second
+     * mean something.
+     */
     public DateTime GetTime()
     {
-//        int hour = (int) currentGameTime / SecondsPerHour;
-//        int minute = (int) (currentGameTime - hour * SecondsPerHour) / SecondsPerMinute;
-//        int second = (int) (currentGameTime - hour * SecondsPerHour - minute * SecondsPerMinute);
-//        return new DateTime(0, 0, 0, hour, minute, second);
-
         DateTime time = DateTime.MinValue;
         return time.AddSeconds(currentGameTime);
     }
 
+    /**
+     * Returns the current in-game time as seconds.
+     */
     public float GetTimeAsSeconds()
     {
         return currentGameTime;

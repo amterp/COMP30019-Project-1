@@ -35,6 +35,12 @@ public class GenerateTerrain : MonoBehaviour
 
     public Transform waterTransform;
 
+    // Min and max heights of the current terrain.
+    [HideInInspector]
+    public float minHeight;
+    [HideInInspector]
+    public float maxHeight;
+
     // Constants.
 
     private int numNodesPerSide;
@@ -65,7 +71,7 @@ public class GenerateTerrain : MonoBehaviour
     // go when looking for neighbors in each step.
     private int matrixJumpSize;
 
-    // Heights of our terrain
+    // Heights of our terrain.
     private float[,] heights;
 
     // Use this for initialization
@@ -86,6 +92,17 @@ public class GenerateTerrain : MonoBehaviour
      */
     public void Generate(int _seed)
     {
+        // Calculate and set important values.
+
+        // Comes from each side being 2^n + 1 nodes.
+        numNodesPerSide = (int)Mathf.Pow(2, n) + 1;
+        numNodes = numNodesPerSide * numNodesPerSide;
+
+        // The actual in-Unity distance between nodes.
+        // TODO: the -1 is required to make the size properly match 'sideLength'. That's a bit weird.
+        distBetweenNodes = (float)sideLength / (numNodesPerSide - 1);
+        Debug.Log(string.Format("numNodesPerSide: {0}, distBetweenNodes: {1}", numNodesPerSide, distBetweenNodes));
+
         // Calculate the terrain.
         heights = DiamondSquare.GetHeights(_seed, n, minCornerHeight, maxCornerHeight, minHeightAddition,
             maxHeightAddition,
@@ -104,7 +121,8 @@ public class GenerateTerrain : MonoBehaviour
         // Set the height of the water plane (in the middle of the highest and lowest point of the terrain)
         SetWaterTransform();
 
-        // Generate a collision mesh.
+        // Generate a collision mesh, first destroying any existing one.
+        Destroy(gameObject.GetComponent<MeshCollider>());
         gameObject.AddComponent<MeshCollider>();
 
         // Initialize terrain colors.
@@ -120,17 +138,6 @@ public class GenerateTerrain : MonoBehaviour
         // Grab references to components.
         meshFilter = GetComponent<MeshFilter>();
         terrainColorizer = GetComponent<TerrainColor>();
-
-        // Calculate and set important values.
-
-        // Comes from each side being 2^n + 1 nodes.
-        numNodesPerSide = (int)Mathf.Pow(2, n) + 1;
-        numNodes = numNodesPerSide * numNodesPerSide;
-
-        // The actual in-Unity distance between nodes.
-        // TODO: the -1 is required to make the size properly match 'sideLength'. That's a bit weird.
-        distBetweenNodes = (float)sideLength / (numNodesPerSide - 1);
-        Debug.Log(string.Format("numNodesPerSide: {0}, distBetweenNodes: {1}", numNodesPerSide, distBetweenNodes));
     }
 
     /**
@@ -154,11 +161,11 @@ public class GenerateTerrain : MonoBehaviour
     {
         // Get our highest and lowest points on the map
         float[] minMaxNodes = Utilities.GetMinMaxNodes(heights);
-        float min = minMaxNodes[0];
-        float max = minMaxNodes[1];
+        minHeight = minMaxNodes[0];
+        maxHeight = minMaxNodes[1];
 
         // Set the water position.
-        float waterHeight = (min + max) / 2;
+        float waterHeight = (minHeight + maxHeight) / 2;
         waterTransform.position = new Vector3(sideLength / 2, waterHeight, sideLength / 2);
 
         // Set the water scale.
