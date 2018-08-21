@@ -660,7 +660,7 @@ MonoBehaviour:
   maxHeightAddition: 4
   minHeightAddition: -4
   heightAdditionFactor: 0.52
-  waterPlane: {fileID: 1810170978}
+  waterTransform: {fileID: 1810170979}
 --- !u!4 &204458223
 Transform:
   m_ObjectHideFlags: 0
