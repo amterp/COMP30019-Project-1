@@ -6,9 +6,7 @@ using UnityEngine.UI;
 public class GenerateTerrainButton : MonoBehaviour
 {
     // A reference to the current terrain object.
-    public GameObject currentTerrainObject;
-    // A reference to the material used for the terrain.
-    public Material terrainMaterial;
+    public GameObject terrainObject;
 
     // A reference to the actual button that will be pressed to trigger
     // script.
@@ -23,33 +21,13 @@ public class GenerateTerrainButton : MonoBehaviour
 	}
 
     /**
-     * Removes the old terrain, instantiates a new one, and sets up the parameters
-     * in the terrain script.
+     * Called when the button is pressed. Requests that the terrain object generate
+     * a new terrain.
      */
     private void GenerateTerrain()
     {
         // Get a reference to the old script.
-        GenerateTerrain oldTerrainScript = currentTerrainObject.GetComponent<GenerateTerrain>();
-
-        // Clean up old terrain.
-        Destroy(currentTerrainObject);
-
-        // Instantiate new terrain.
-        currentTerrainObject = new GameObject();
-        currentTerrainObject.AddComponent<GenerateTerrain>();
-        currentTerrainObject.GetComponent<MeshRenderer>().material = terrainMaterial;
-
-        // Get and set new terrain parameters.
-
-        GenerateTerrain terrainScript = currentTerrainObject.GetComponent<GenerateTerrain>();
-        terrainScript.n = oldTerrainScript.n;
-        terrainScript.sideLength = oldTerrainScript.sideLength;
-        // For now, this will make the button essentially generate a random terrain.
-        terrainScript.seed = Time.frameCount;
-        terrainScript.minCornerHeight = oldTerrainScript.minCornerHeight;
-        terrainScript.maxCornerHeight = oldTerrainScript.maxCornerHeight;
-        terrainScript.minHeightAddition = oldTerrainScript.minHeightAddition;
-        terrainScript.maxHeightAddition = oldTerrainScript.maxHeightAddition;
-        terrainScript.heightAdditionFactor = oldTerrainScript.heightAdditionFactor;
+        GenerateTerrain oldTerrainScript = terrainObject.GetComponent<GenerateTerrain>();
+        oldTerrainScript.Generate(Time.frameCount);
     }
 }

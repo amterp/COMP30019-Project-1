@@ -738,7 +738,6 @@ MonoBehaviour:
   mountainBufferZone: 0
   snowBufferZone: 0
   useWaterPlaneHeight: 1
-  waterPlane: {fileID: 1810170978}
 --- !u!1 &205626126
 GameObject:
   m_ObjectHideFlags: 0
