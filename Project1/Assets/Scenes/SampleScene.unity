@@ -660,7 +660,7 @@ MonoBehaviour:
   maxHeightAddition: 4
   minHeightAddition: -4
   heightAdditionFactor: 0.52
-  waterPlane: {fileID: 1810170978}
+  waterTransform: {fileID: 1810170979}
 --- !u!4 &204458223
 Transform:
   m_ObjectHideFlags: 0
@@ -738,7 +738,6 @@ MonoBehaviour:
   mountainBufferZone: 0
   snowBufferZone: 0
   useWaterPlaneHeight: 1
-  waterPlane: {fileID: 1810170978}
 --- !u!1 &205626126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1890,7 +1889,6 @@ GameObject:
   - component: {fileID: 923692506}
   - component: {fileID: 923692505}
   - component: {fileID: 923692504}
-  - component: {fileID: 923692503}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1917,17 +1915,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &923692503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 923692501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71158d1e12d7fd84cbd41f371ddca9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &923692504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7535,7 +7522,6 @@ GameObject:
   - component: {fileID: 1303375114}
   - component: {fileID: 1303375113}
   - component: {fileID: 1303375112}
-  - component: {fileID: 1303375115}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -7636,19 +7622,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1303375110}
---- !u!114 &1303375115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1303375110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e91c98ba59250142b24ea03a739f8a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentTerrainObject: {fileID: 204458221}
-  terrainMaterial: {fileID: 2100000, guid: 7a458c37cb724704bb1485479769f7af, type: 2}
 --- !u!1 &1373499851
 GameObject:
   m_ObjectHideFlags: 0
@@ -8600,6 +8573,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1685991728}
+  - component: {fileID: 1685991729}
   - component: {fileID: 1685991730}
   m_Layer: 5
   m_Name: ExitButton
@@ -8627,6 +8601,18 @@ RectTransform:
   m_AnchoredPosition: {x: -20, y: -20}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
+--- !u!114 &1685991729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1685991727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71158d1e12d7fd84cbd41f371ddca9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 923692504}
 --- !u!114 &1685991730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9539,9 +9525,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2042301202}
+  - component: {fileID: 2042301204}
   - component: {fileID: 2042301203}
   m_Layer: 5
-  m_Name: GenerateTerrain
+  m_Name: GenerateTerrainButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9579,6 +9566,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beginEnabled: 0
   invert: 0
+--- !u!114 &2042301204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2042301201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e91c98ba59250142b24ea03a739f8a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1303375112}
+  terrainObject: {fileID: 204458221}
 --- !u!1 &2058630158
 GameObject:
   m_ObjectHideFlags: 0

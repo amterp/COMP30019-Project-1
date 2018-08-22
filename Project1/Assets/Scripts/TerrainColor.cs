@@ -24,29 +24,25 @@ public class TerrainColor : MonoBehaviour {
     public float mountainBufferZone = 0;
     public float snowBufferZone = 0;
 
-    // Use Water Plane Height?
-    public bool useWaterPlaneHeight = false;
+    // Whether or not to use the water's height.
+    public bool useWaterPlaneHeight = true;
 
-    // Water Plane object height to determine values
-    public GameObject waterPlane;
+    // Water transform used to determine values.
+    private Transform waterTransform;
 
     // Use this for initialization
-    public void Start () {
+    public void Initialize (Transform waterTransform)
+    {
+        this.waterTransform = waterTransform;
 
         // If we're using the water plane height, then calculate colours based on the water plane height
         if (useWaterPlaneHeight)
         {
-            waterHeight = waterPlane.transform.position.y;
+            waterHeight = waterTransform.transform.position.y;
         }
 
         // Grab references to components.
         meshFilter = GetComponent<MeshFilter>();
-        SetColorVertices(meshFilter.mesh);
-    }
-
-    void Update()
-    {
-        // Update our colours for live editing!
         SetColorVertices(meshFilter.mesh);
     }
 

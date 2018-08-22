@@ -7,12 +7,11 @@ public class Quit : MonoBehaviour {
 
     // A reference to the actual button that will be pressed to trigger
     // script.
-    private Button button;
+    public Button button;
 
     // Use this for initialization
     void Start ()
     {
-        button = GetComponent<Button>();
         button.onClick.AddListener(Application.Quit);
     }
 }

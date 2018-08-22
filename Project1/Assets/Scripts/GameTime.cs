@@ -39,10 +39,10 @@ public class GameTime : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 	    UpdateTime();
-	    Debug.Log("Gametime: " + currentGameTime);
-    }
+	}
 
     /**
      * Set the in-game clock to a particular time.

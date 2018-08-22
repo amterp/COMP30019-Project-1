@@ -6,7 +6,10 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public class GenerateTerrain : MonoBehaviour {
+public class GenerateTerrain : MonoBehaviour
+{
+    // Public input fields.
+
     // The number of nodes in the equation 2^n + 1 where that equation
     // is the terrain's width and height. Does NOT affect its actual width or
     // height. That's reflected by 'sideLength'. Cannot be > 15 due to the 
@@ -30,15 +33,15 @@ public class GenerateTerrain : MonoBehaviour {
     // by every step to reduce the random value added to each node.
     public float heightAdditionFactor;
 
+    public Transform waterTransform;
+
     // Constants.
 
     private int numNodesPerSide;
     private float distBetweenNodes;
     private int numNodes;
     private MeshFilter meshFilter;
-
-    // Water Plane object for reference
-    public GameObject waterPlane; 
+    private TerrainColor terrainColorizer;
 
     // Variables.
 
@@ -66,9 +69,57 @@ public class GenerateTerrain : MonoBehaviour {
     private float[,] heights;
 
     // Use this for initialization
-    void Awake() {
+    void Start() {
+        Initialize();
+        Generate(seed);
+    }
+
+    void Update() {
+        // Update the terrain's colors for live editing.
+        terrainColorizer.SetColorVertices(meshFilter.mesh);
+    }
+
+    /**
+     * Must be called after Initialize() has been called at least one.
+     * Utilizes the values set in Initialize() to generate a height map and then
+     * creating a terrain mesh for it. Also properly positions the water.
+     */
+    public void Generate(int _seed)
+    {
+        // Calculate the terrain.
+        heights = DiamondSquare.GetHeights(_seed, n, minCornerHeight, maxCornerHeight, minHeightAddition,
+            maxHeightAddition,
+            heightAdditionFactor);
+        CreateVertices(); // Create the nodes/vertices for the terrain and place them.
+
+        // Define the mesh.
+        SetMeshVertices(meshFilter.mesh); // Define the vertices for the mesh.
+        SetMeshTriangles(meshFilter.mesh); // Define the triangles for the mesh.
+
+        // Calculate the mesh's normals and tangents, to allow for proper lighting
+        meshFilter.mesh.RecalculateNormals();
+        meshFilter.mesh.RecalculateTangents();
+        meshFilter.mesh.RecalculateBounds();
+
+        // Set the height of the water plane (in the middle of the highest and lowest point of the terrain)
+        SetWaterTransform();
+
+        // Generate a collision mesh.
+        gameObject.AddComponent<MeshCollider>();
+
+        // Initialize terrain colors.
+        terrainColorizer.Initialize(waterTransform);
+    }
+
+    /**
+     * Initializes all the important values that will be used to generate the terrain.
+     */
+    private void Initialize()
+    {
+        Debug.Log("Initializing terrain.");
         // Grab references to components.
         meshFilter = GetComponent<MeshFilter>();
+        terrainColorizer = GetComponent<TerrainColor>();
 
         // Calculate and set important values.
 
@@ -80,34 +131,13 @@ public class GenerateTerrain : MonoBehaviour {
         // TODO: the -1 is required to make the size properly match 'sideLength'. That's a bit weird.
         distBetweenNodes = (float)sideLength / (numNodesPerSide - 1);
         Debug.Log(string.Format("numNodesPerSide: {0}, distBetweenNodes: {1}", numNodesPerSide, distBetweenNodes));
-
-        // Calculate the terrain.
-        heights = DiamondSquare.GetHeights(seed, n, minCornerHeight, maxCornerHeight, minHeightAddition,
-            maxHeightAddition,
-            heightAdditionFactor);
-        CreateVertices(heights); // Create the nodes/vertices for the terrain and place them.
-
-        // Define the mesh.
-        SetMeshVertices(meshFilter.mesh); // Define the vertices for the mesh.
-        SetMeshTriangles(meshFilter.mesh); // Define the triangles for the mesh.
-
-        // Calculate the mesh's normals and tangents, to allow for proper lighting
-        meshFilter.mesh.RecalculateNormals();
-        meshFilter.mesh.RecalculateTangents();
-        meshFilter.mesh.RecalculateBounds();
-        
-        // Set the height of the water plane (in the middle of the highest and lowest point of the terrain)
-        SetWaterHeight(heights);
-        
-        // Generate a collision mesh.
-        gameObject.AddComponent<MeshCollider>();
     }
 
     /**
      * This creates the 2D data structure to contain the nodes for the terrain.
      * It does *not* initialize the corners.
      */
-    private void CreateVertices(float[,] heights) {
+    private void CreateVertices() {
         nodes = new Node[numNodesPerSide, numNodesPerSide];
         for (int z = 0; z < numNodesPerSide; z++) {
             for (int x = 0; x < numNodesPerSide; x++) {
@@ -117,21 +147,22 @@ public class GenerateTerrain : MonoBehaviour {
     }
 
     /**
-     * Set Height of water plane. This should be set at 50% of the highest point.
+     * Set transform of water plane. This method sets it to be the center of the terrain in
+     * all directions, spanning as far out as the terrain does.
      */
-    private void SetWaterHeight(float[,] heights)
+    private void SetWaterTransform()
     {
         // Get our highest and lowest points on the map
-        float[] minMaxNodes = TerrainUtilities.GetMinMaxNodes(heights);
+        float[] minMaxNodes = Utilities.GetMinMaxNodes(heights);
         float min = minMaxNodes[0];
         float max = minMaxNodes[1];
 
-        // Set our water height
-        float waterHeight = (max + min) / 2;
-        Vector3 localPos = waterPlane.transform.localPosition;
-        localPos.y = waterHeight;
+        // Set the water position.
+        float waterHeight = (min + max) / 2;
+        waterTransform.position = new Vector3(sideLength / 2, waterHeight, sideLength / 2);
 
-        waterPlane.transform.position = localPos;
+        // Set the water scale.
+        waterTransform.localScale = new Vector3(sideLength, 1, sideLength);
     }
 
     /**
