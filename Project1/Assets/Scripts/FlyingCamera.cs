@@ -8,6 +8,8 @@ public class FlyingCamera : MonoBehaviour {
     public float sprintMultiplier;
     public float xLookSensitivity;
     public float yLookSensitivity;
+    public GenerateTerrain terrainScript;
+    public float maxHeightAboveTerrain;
 
     private Rigidbody rb;
 
@@ -27,6 +29,7 @@ public class FlyingCamera : MonoBehaviour {
     {
         PerformCameraRotation();
         PerformCameraTranslation();
+        ClampBounds();
     }
 
     /**
@@ -70,6 +73,20 @@ public class FlyingCamera : MonoBehaviour {
         // Set the camera's velocity. No * Time.deltaTime required because
         // velocity is already "per second".
         rb.velocity = movement;
+    }
+
+    /**
+     * Ensures that the camera is not ourside of the terrain's area.
+     */
+    private void ClampBounds()
+    {
+        Vector3 clampedPosition = new Vector3(
+            Mathf.Clamp(transform.position.x, 0, terrainScript.sideLength),
+            Mathf.Clamp(transform.position.y, float.MinValue, terrainScript.maxCornerHeight + maxHeightAboveTerrain),
+            Mathf.Clamp(transform.position.z, 0, terrainScript.sideLength)
+        );
+
+        transform.position = clampedPosition;
     }
 
     /**

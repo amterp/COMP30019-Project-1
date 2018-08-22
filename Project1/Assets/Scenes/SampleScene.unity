@@ -661,6 +661,8 @@ MonoBehaviour:
   minHeightAddition: -4
   heightAdditionFactor: 0.52
   waterTransform: {fileID: 1810170979}
+  minHeight: 0
+  maxHeight: 0
 --- !u!4 &204458223
 Transform:
   m_ObjectHideFlags: 0
@@ -916,6 +918,8 @@ MonoBehaviour:
   sprintMultiplier: 12
   xLookSensitivity: 16
   yLookSensitivity: 16
+  terrainScript: {fileID: 204458222}
+  maxHeightAboveTerrain: 80
 --- !u!135 &240373537
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -935,7 +939,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 240373535}
   m_LocalRotation: {x: 0.066452265, y: -0.9098438, z: 0.16042997, w: 0.37686962}
-  m_LocalPosition: {x: 40, y: 20, z: 40}
+  m_LocalPosition: {x: 40, y: 22, z: 40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 282840814}
@@ -9579,6 +9583,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 1303375112}
   terrainObject: {fileID: 204458221}
+  playerCamera: {fileID: 240373538}
+  cameraHeightMultiplier: 1.2
 --- !u!1 &2058630158
 GameObject:
   m_ObjectHideFlags: 0

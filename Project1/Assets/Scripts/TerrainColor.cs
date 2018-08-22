@@ -27,13 +27,9 @@ public class TerrainColor : MonoBehaviour {
     // Whether or not to use the water's height.
     public bool useWaterPlaneHeight = true;
 
-    // Water transform used to determine values.
-    private Transform waterTransform;
-
     // Use this for initialization
     public void Initialize (Transform waterTransform)
     {
-        this.waterTransform = waterTransform;
 
         // If we're using the water plane height, then calculate colours based on the water plane height
         if (useWaterPlaneHeight)
