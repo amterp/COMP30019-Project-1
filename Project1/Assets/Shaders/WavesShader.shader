@@ -4,9 +4,9 @@
 	{
 		_MainTex ("Texture", 2D) = "white" {}
 		_Tint ("Color", Color) = (1,1,1,1)
-		_Amplitude ("Amplitude", Range(0,2.5)) = 2
-		_Frequency ("Frequency", Range(0,10)) = 2
-		_Wavelength ("Wavelength", Range(0,10)) = 2
+		_Amplitude ("Amplitude", Range(0,2)) = 0.25
+		_Frequency ("Frequency", Range(0,5)) = 1
+		_Wavelength ("Wavelength", Range(0,10)) = 4
 		_Transparency ("Transparency", Range(0,1)) = 1
 		_GameTime ("GameTime", float) = 0
 	}
@@ -69,7 +69,8 @@
 				fixed4 col = tex2D(_MainTex, i.uv);
 				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, col);
-				return col * _Tint * float4(1,1,1,_Transparency);
+				col.a = _Transparency;
+				return col * _Tint;
 			}
 			ENDCG
 		}
