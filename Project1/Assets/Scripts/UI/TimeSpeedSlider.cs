@@ -9,19 +9,21 @@ public class TimeSpeedSlider : MonoBehaviour
     public Slider slider;
     public Text timeSpeedText;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         // Subscribe to slider changes.
-		slider.onValueChanged.AddListener(OnSliderChange);
+        slider.onValueChanged.AddListener(OnSliderChange);
 
         // Initialize the text to the current value.
-        UpdateTimeSpeedText((int) gameTime.timeProgression);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        UpdateTimeSpeedText((int)gameTime.timeProgression);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     /**
      * This will be called every time the slider's value changes.
@@ -30,7 +32,7 @@ public class TimeSpeedSlider : MonoBehaviour
     private void OnSliderChange(float newValue)
     {
         // Piecewise function.
-        int newSpeed = newValue <= 2 ? (int) newValue : (int) Mathf.Pow(2, newValue);
+        int newSpeed = newValue <= 2 ? (int)newValue : (int)Mathf.Pow(2, newValue);
         gameTime.timeProgression = newSpeed;
         UpdateTimeSpeedText(newSpeed);
     }
@@ -43,3 +45,4 @@ public class TimeSpeedSlider : MonoBehaviour
         timeSpeedText.text = string.Format("{0}x", speed);
     }
 }
+

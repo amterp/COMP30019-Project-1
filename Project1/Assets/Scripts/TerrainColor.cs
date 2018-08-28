@@ -27,14 +27,25 @@ public class TerrainColor : MonoBehaviour {
     // Whether or not to use the water's height.
     public bool useWaterPlaneHeight = true;
 
+    // Whether or not snow should be defined as the highest point on the map
+    // Note: This will also alter the mountain height to prevent the snow from not appearing
+    public bool useSnowMaxHeight = true;
+
     // Use this for initialization
-    public void Initialize (Transform waterTransform)
+    public void Initialize (Transform waterTransform, float[] minMaxHeights)
     {
 
         // If we're using the water plane height, then calculate colours based on the water plane height
         if (useWaterPlaneHeight)
         {
             waterHeight = waterTransform.transform.position.y;
+        }
+
+        // If we're using the snow as the max height, then set the height for snow and mountain to appear
+        if (useSnowMaxHeight)
+        {
+            snowHeight = minMaxHeights[1] - 2;
+            mountainHeight = snowHeight - 2;
         }
 
         // Grab references to components.

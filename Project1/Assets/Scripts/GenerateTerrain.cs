@@ -120,14 +120,15 @@ public class GenerateTerrain : MonoBehaviour
         meshFilter.mesh.RecalculateBounds();
 
         // Set the height of the water plane (in the middle of the highest and lowest point of the terrain)
-        SetWaterTransform();
+        // Also, get our highest/lowest points of the terrain for later shading
+        float[] minMaxHeights = SetPlaneTransform();
 
         // Generate a collision mesh, first destroying any existing one.
         Destroy(gameObject.GetComponent<MeshCollider>());
         gameObject.AddComponent<MeshCollider>();
 
         // Initialize terrain colors.
-        terrainColorizer.Initialize(waterTransform);
+        terrainColorizer.Initialize(waterTransform, minMaxHeights);
     }
 
     /**
@@ -155,10 +156,12 @@ public class GenerateTerrain : MonoBehaviour
     }
 
     /**
-     * Set transform of water plane. This method sets it to be the center of the terrain in
-     * all directions, spanning as far out as the terrain does.
+     * Set transform of a plane. This method sets it to be the center of the terrain in
+     * all directions, spanning as far out as the terrain does. This should be used with the
+     * water plane. Additionally, it also returns the lowest and highest point of the map as an
+     * array of floats of size 2.
      */
-    private void SetWaterTransform()
+    private float[] SetPlaneTransform()
     {
         // Get our highest and lowest points on the map
         float[] minMaxNodes = Utilities.GetMinMaxNodes(heights);
@@ -171,6 +174,8 @@ public class GenerateTerrain : MonoBehaviour
 
         // Set the water scale.
         waterTransform.localScale = new Vector3(sideLength, 1, sideLength);
+
+        return minMaxNodes;
     }
 
     /**
