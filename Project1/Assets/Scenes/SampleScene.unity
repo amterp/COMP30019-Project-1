@@ -772,7 +772,7 @@ GameObject:
   m_Component:
   - component: {fileID: 147613983}
   m_Layer: 5
-  m_Name: AmplitudeCounter
+  m_Name: AmplitudeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2014,7 +2014,7 @@ GameObject:
   - component: {fileID: 292597425}
   - component: {fileID: 292597424}
   m_Layer: 5
-  m_Name: SandHeightText
+  m_Name: AmplitudeCounterText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2070,7 +2070,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mid
+  m_Text: Default
 --- !u!222 &292597425
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2270,7 +2270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 334457112}
   m_Layer: 5
-  m_Name: MountainCounter
+  m_Name: FrequencyCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3262,7 +3262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 535352179}
   m_Layer: 5
-  m_Name: SandCounter
+  m_Name: AmplitudeCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3729,7 +3729,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mid
+  m_Text: Default
 --- !u!222 &629726366
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3928,7 +3928,7 @@ GameObject:
   - component: {fileID: 683717444}
   - component: {fileID: 683717443}
   m_Layer: 5
-  m_Name: MountainHeightBackground
+  m_Name: FrequencyCounterBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4591,7 +4591,7 @@ GameObject:
   - component: {fileID: 858844737}
   - component: {fileID: 858844736}
   m_Layer: 5
-  m_Name: SandHeightBackground
+  m_Name: AmplitudeCounterBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5010,7 +5010,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mid
+  m_Text: Default
 --- !u!222 &911660605
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10789,7 +10789,7 @@ GameObject:
   - component: {fileID: 1110542371}
   - component: {fileID: 1110542370}
   m_Layer: 5
-  m_Name: SnowHeightBackground
+  m_Name: WavelengthCounterBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10856,7 +10856,7 @@ GameObject:
   - component: {fileID: 1125439862}
   - component: {fileID: 1125439861}
   m_Layer: 5
-  m_Name: SnowHeightText
+  m_Name: WavelengthCounterText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10912,7 +10912,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mid
+  m_Text: Default
 --- !u!222 &1125439862
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11476,9 +11476,9 @@ MonoBehaviour:
   amplitudeSlider: {fileID: 393024408}
   frequencySlider: {fileID: 1690284876}
   wavelengthSlider: {fileID: 2146413355}
-  amplitudeText: {fileID: 275136656}
-  frequencyText: {fileID: 1316453722}
-  wavelengthText: {fileID: 1909333326}
+  amplitudeText: {fileID: 292597424}
+  frequencyText: {fileID: 1562941443}
+  wavelengthText: {fileID: 1125439861}
 --- !u!23 &1196283371
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13233,13 +13233,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a1bdc9626b4bac478e22b41ef0616d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainColor: {fileID: 0}
-  sandSlider: {fileID: 0}
-  mountainSlider: {fileID: 0}
-  snowSlider: {fileID: 0}
-  sandHeightText: {fileID: 0}
-  mountainHeightText: {fileID: 0}
-  snowHeightText: {fileID: 0}
+  terrainColor: {fileID: 204458226}
+  sandSlider: {fileID: 1083650354}
+  mountainSlider: {fileID: 961899573}
+  snowSlider: {fileID: 1892626058}
+  sandHeightText: {fileID: 629726365}
+  mountainHeightText: {fileID: 911660604}
+  snowHeightText: {fileID: 1876644035}
 --- !u!23 &1489647757
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13949,7 +13949,7 @@ GameObject:
   - component: {fileID: 1562941444}
   - component: {fileID: 1562941443}
   m_Layer: 5
-  m_Name: MountainHeightText
+  m_Name: FrequencyCounterText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14005,7 +14005,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mid
+  m_Text: Default
 --- !u!222 &1562941444
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14156,7 +14156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1604109881}
   m_Layer: 5
-  m_Name: FrequencyCounter
+  m_Name: FrequencyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15671,7 +15671,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1819833413}
   m_Layer: 5
-  m_Name: SnowCounter
+  m_Name: WavelengthCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15971,7 +15971,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mid
+  m_Text: Default
 --- !u!222 &1876644036
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17428,7 +17428,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2074848106}
   m_Layer: 5
-  m_Name: WavelengthCounter
+  m_Name: WavelengthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
