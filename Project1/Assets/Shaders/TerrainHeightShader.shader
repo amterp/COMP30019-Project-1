@@ -2,6 +2,11 @@
 
 	Properties {
 		_Tint("Tint", Color) = (1, 1, 1, 1)
+		//_Color("sandColor", Color) = (1, 1, 1, 1)
+		//_Color("snowColor", Color) = (1, 1, 1, 1)
+		//_Color("defaultColor", Color) = (1, 1, 1, 1)
+		//_Color("mountainColor", Color) = (1, 1, 1, 1)
+
 		//_MainTex ("Texture", 2D) = "white" {}
 	}
 
