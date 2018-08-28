@@ -26,20 +26,20 @@ public class GenerateTerrain : MonoBehaviour
 
     // Diamond-square tweakable values.
 
-    public float maxHeightAddition;
-    public float minHeightAddition;
+    public float minNoiseAddition;
+    public float maxNoiseAddition;
 
     // The % amount that the heightAddition fields should be multiplied
     // by every step to reduce the random value added to each node.
-    public float heightAdditionFactor;
+    public float noiseReductionFactor;
 
     public Transform waterTransform;
 
     // Min and max heights of the current terrain.
     [HideInInspector]
-    public float minHeight;
+    public float highestHeight;
     [HideInInspector]
-    public float maxHeight;
+    public float lowestHeight;
 
     // Constants.
 
@@ -104,12 +104,13 @@ public class GenerateTerrain : MonoBehaviour
         Debug.Log(string.Format("numNodesPerSide: {0}, distBetweenNodes: {1}", numNodesPerSide, distBetweenNodes));
 
         // Calculate the terrain.
-        heights = DiamondSquare.GetHeights(_seed, n, minCornerHeight, maxCornerHeight, minHeightAddition,
-            maxHeightAddition,
-            heightAdditionFactor);
+        heights = DiamondSquare.GetHeights(_seed, n, minCornerHeight, maxCornerHeight, minNoiseAddition,
+            maxNoiseAddition,
+            noiseReductionFactor);
         CreateVertices(); // Create the nodes/vertices for the terrain and place them.
 
         // Define the mesh.
+        meshFilter.mesh.Clear(); // Clear any existing data.
         SetMeshVertices(meshFilter.mesh); // Define the vertices for the mesh.
         SetMeshTriangles(meshFilter.mesh); // Define the triangles for the mesh.
 
@@ -164,11 +165,11 @@ public class GenerateTerrain : MonoBehaviour
     {
         // Get our highest and lowest points on the map
         float[] minMaxNodes = Utilities.GetMinMaxNodes(heights);
-        minHeight = minMaxNodes[0];
-        maxHeight = minMaxNodes[1];
+        highestHeight = minMaxNodes[0];
+        lowestHeight = minMaxNodes[1];
 
         // Set the water position.
-        float waterHeight = (minHeight + maxHeight) / 2;
+        float waterHeight = (highestHeight + lowestHeight) / 2;
         waterTransform.position = new Vector3(sideLength / 2, waterHeight, sideLength / 2);
 
         // Set the water scale.
