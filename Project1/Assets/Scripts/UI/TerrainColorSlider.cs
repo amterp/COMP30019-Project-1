@@ -76,7 +76,7 @@ public class TerrainColorSlider : MonoBehaviour
      */
     private void UpdateHeightText(Text updateText, float value)
     {
-        updateText.text = string.Format("{0}", value);
+        updateText.text = string.Format("{0}", System.Math.Round(value, 2));
     }
 }
 
