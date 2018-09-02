@@ -33,7 +33,7 @@ public class GenerateTerrain : MonoBehaviour
     // by every step to reduce the random value added to each node.
     public float noiseReductionFactor;
 
-    public Transform waterTransform;
+    public GameObject waterPlane;
 
     // Min and max heights of the current terrain.
     [HideInInspector]
@@ -99,14 +99,17 @@ public class GenerateTerrain : MonoBehaviour
 
         // Set the height of the water plane (in the middle of the highest and lowest point of the terrain)
         // Also, get our highest/lowest points of the terrain for later shading
-        float[] minMaxHeights = SetPlaneTransform();
+        float[] minMaxHeights = Utilities.GetMinMaxNodes(heights);
+        lowestHeight = minMaxHeights[0];
+        highestHeight = minMaxHeights[1];
+        waterPlane.GetComponent<WaterMesh>().Initialize(sideLength, lowestHeight, highestHeight);
 
         // Generate a collision mesh, first destroying any existing one.
         Destroy(gameObject.GetComponent<MeshCollider>());
         gameObject.AddComponent<MeshCollider>();
 
         // Initialize terrain colors.
-        terrainColorizer.Initialize(waterTransform, minMaxHeights);
+        terrainColorizer.Initialize(waterPlane.transform, minMaxHeights);
     }
 
     /**
@@ -118,29 +121,6 @@ public class GenerateTerrain : MonoBehaviour
         // Grab references to components.
         meshFilter = GetComponent<MeshFilter>();
         terrainColorizer = GetComponent<TerrainColor>();
-    }
-
-    /**
-     * Set transform of a plane. This method sets it to be the center of the terrain in
-     * all directions, spanning as far out as the terrain does. This should be used with the
-     * water plane. Additionally, it also returns the lowest and highest point of the map as an
-     * array of floats of size 2.
-     */
-    private float[] SetPlaneTransform()
-    {
-        // Get our highest and lowest points on the map
-        float[] minMaxNodes = Utilities.GetMinMaxNodes(heights);
-        highestHeight = minMaxNodes[0];
-        lowestHeight = minMaxNodes[1];
-
-        // Set the water position.
-        float waterHeight = (highestHeight + lowestHeight) / 2;
-        waterTransform.position = new Vector3(sideLength / 2, waterHeight, sideLength / 2);
-
-        // Set the water scale.
-        waterTransform.localScale = new Vector3(sideLength, 1, sideLength);
-
-        return minMaxNodes;
     }
 
     /**

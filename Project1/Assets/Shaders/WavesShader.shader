@@ -1,4 +1,4 @@
-﻿Shader "Unlit/WavesShader"
+﻿Shader "Custom/WavesShader"
 {
 	Properties
 	{

@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class MeshGenerator {
 
+    /**
+     * Returns a flat, square mesh with the desired number of vertices, spaced the desired amount.
+     * This mesh has calculated normals, tangents, bounds, and UVs.
+     */
     public static Mesh GenerateSquareMesh(int numVerticesPerSide, float distBetweenVertices)
     {
         Mesh mesh = new Mesh();
 
         CreateVertices(mesh, numVerticesPerSide, distBetweenVertices);
         SetMeshTriangles(mesh, numVerticesPerSide);
+        SetMeshUVs(mesh, numVerticesPerSide);
+
+        mesh.RecalculateNormals();
+        mesh.RecalculateTangents();
+        mesh.RecalculateBounds();
 
         return mesh;
     }
@@ -51,5 +60,23 @@ public class MeshGenerator {
         }
 
         mesh.vertices = vertices;
+    }
+
+    /**
+     * Set the UV values for the texture to fit the size of the mesh.
+     */
+    private static void SetMeshUVs(Mesh mesh, int numVerticesPerSide)
+    {
+        Vector2[] uvs = new Vector2[numVerticesPerSide * numVerticesPerSide];
+
+        for (int z = 0, v = 0; z < numVerticesPerSide; z++) {
+            for (int x = 0; x < numVerticesPerSide; x++, v++)
+            {
+                uvs[z * numVerticesPerSide + x].x = (float) x * 1 / numVerticesPerSide;
+                uvs[z * numVerticesPerSide + x].y = (float) z * 1 / numVerticesPerSide;
+            }
+        }
+
+        mesh.uv = uvs;
     }
 }
