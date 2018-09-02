@@ -58,18 +58,7 @@ public class GenerateTerrain : MonoBehaviour
     // x-z axes. i.e. nodes[0, 0] is a node on the origin, and 
     // nodes[x, z] is the (x+1)th node over on the x axis, and (z+1)th
     // node over on the z axis.
-    private Node[,] nodes;
-
-    // Variables used as part of the actual diamond-step algorithm
-
-    // Nodes to initialize on the next step of the algorithm.
-    private Node[] verticesToInitialize;
-    // A bool used to keep track of whether we've just performed a 
-    // diamond or square step.
-    private bool onDiamondStep;
-    // A variable used to keep track of the number of nodes over to 
-    // go when looking for neighbors in each step.
-    private int matrixJumpSize;
+    private Vector3[,] nodes;
 
     // Heights of our terrain.
     private float[,] heights;
@@ -147,10 +136,10 @@ public class GenerateTerrain : MonoBehaviour
      * It does *not* initialize the corners.
      */
     private void CreateVertices() {
-        nodes = new Node[numNodesPerSide, numNodesPerSide];
+        nodes = new Vector3[numNodesPerSide, numNodesPerSide];
         for (int z = 0; z < numNodesPerSide; z++) {
             for (int x = 0; x < numNodesPerSide; x++) {
-                nodes[x, z] = new Node(new Vector3(x * distBetweenNodes, heights[x, z], z * distBetweenNodes));
+                nodes[x, z] = new Vector3(x * distBetweenNodes, heights[x, z], z * distBetweenNodes);
             }
         }
     }
@@ -189,7 +178,7 @@ public class GenerateTerrain : MonoBehaviour
 
         for (int z = 0, v = 0; z < numNodesPerSide; z++) {
             for (int x = 0; x < numNodesPerSide; x++, v++) {
-                flatVertices[v] = nodes[x, z].pos;
+                flatVertices[v] = nodes[x, z];
             }
         }
 
