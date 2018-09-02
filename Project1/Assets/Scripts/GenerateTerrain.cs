@@ -79,7 +79,6 @@ public class GenerateTerrain : MonoBehaviour
         numNodes = numNodesPerSide * numNodesPerSide;
 
         // The actual in-Unity distance between nodes.
-        // TODO: the -1 is required to make the size properly match 'sideLength'. That's a bit weird.
         distBetweenNodes = (float)sideLength / (numNodesPerSide - 1);
         Debug.Log(string.Format("numNodesPerSide: {0}, distBetweenNodes: {1}", numNodesPerSide, distBetweenNodes));
 
@@ -91,7 +90,7 @@ public class GenerateTerrain : MonoBehaviour
         // Define the mesh.
         meshFilter.mesh.Clear(); // Clear any existing data.
         CreateMeshVertices(meshFilter.mesh); // Define the vertices for the mesh.
-        SetMeshTriangles(meshFilter.mesh); // Define the triangles for the mesh.
+        MeshGenerator.SetMeshTriangles(meshFilter.mesh, numNodesPerSide); // Define the triangles for the mesh.
 
         // Calculate the mesh's normals and tangents, to allow for proper lighting
         meshFilter.mesh.RecalculateNormals();
@@ -159,28 +158,5 @@ public class GenerateTerrain : MonoBehaviour
         }
 
         mesh.vertices = flatVertices;
-    }
-
-    /**
-     * Defines the triangles in the mesh according to the vertices.
-     * This method takes care of referencing each vertex in the correct order
-     * so as to create the correct triangles in the correct direction i.e. clockwise.
-     */
-    private void SetMeshTriangles(Mesh mesh) {
-        int[] triangles = new int[6 * (numNodesPerSide - 1) * (numNodesPerSide - 1)];
-        for (int triangleIndex = 0, vertexIndex = 0, z = 0; z < numNodesPerSide - 1; z++, vertexIndex++) {
-            for (int x = 0; x < numNodesPerSide - 1; x++, triangleIndex += 6, vertexIndex++) {
-                // Each iteration inside this inner loop defines a full square i.e. two triangles.
-                triangles[triangleIndex] = vertexIndex;
-
-                // The following two lines define the triangle vertices that are shared.
-                triangles[triangleIndex + 3] = triangles[triangleIndex + 2] = vertexIndex + 1;
-                triangles[triangleIndex + 4] = triangles[triangleIndex + 1] = vertexIndex + numNodesPerSide;
-
-                triangles[triangleIndex + 5] = vertexIndex + numNodesPerSide + 1;
-            }
-        }
-
-        mesh.triangles = triangles;
     }
 }
