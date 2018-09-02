@@ -51,15 +51,6 @@ public class GenerateTerrain : MonoBehaviour
 
     // Variables.
 
-    // This structure will contain the nodes/vertices for the terrain.
-    // It is a 2D structure which can be queried as e.g. nodes[x, z].
-    // z is used as the second index instead of y to reflect the fact
-    // that the organization of these nodes are in order along the 
-    // x-z axes. i.e. nodes[0, 0] is a node on the origin, and 
-    // nodes[x, z] is the (x+1)th node over on the x axis, and (z+1)th
-    // node over on the z axis.
-    private Vector3[,] nodes;
-
     // Heights of our terrain.
     private float[,] heights;
 
@@ -96,11 +87,10 @@ public class GenerateTerrain : MonoBehaviour
         heights = DiamondSquare.GetHeights(_seed, n, minCornerHeight, maxCornerHeight, minNoiseAddition,
             maxNoiseAddition,
             noiseReductionFactor);
-        CreateVertices(); // Create the nodes/vertices for the terrain and place them.
 
         // Define the mesh.
         meshFilter.mesh.Clear(); // Clear any existing data.
-        SetMeshVertices(meshFilter.mesh); // Define the vertices for the mesh.
+        CreateMeshVertices(meshFilter.mesh); // Define the vertices for the mesh.
         SetMeshTriangles(meshFilter.mesh); // Define the triangles for the mesh.
 
         // Calculate the mesh's normals and tangents, to allow for proper lighting
@@ -132,19 +122,6 @@ public class GenerateTerrain : MonoBehaviour
     }
 
     /**
-     * This creates the 2D data structure to contain the nodes for the terrain.
-     * It does *not* initialize the corners.
-     */
-    private void CreateVertices() {
-        nodes = new Vector3[numNodesPerSide, numNodesPerSide];
-        for (int z = 0; z < numNodesPerSide; z++) {
-            for (int x = 0; x < numNodesPerSide; x++) {
-                nodes[x, z] = new Vector3(x * distBetweenNodes, heights[x, z], z * distBetweenNodes);
-            }
-        }
-    }
-
-    /**
      * Set transform of a plane. This method sets it to be the center of the terrain in
      * all directions, spanning as far out as the terrain does. This should be used with the
      * water plane. Additionally, it also returns the lowest and highest point of the map as an
@@ -168,17 +145,16 @@ public class GenerateTerrain : MonoBehaviour
     }
 
     /**
-     * Pass the 2D 'nodes' structure as a 1D array into mesh.vertices, to define
-     * the mesh's vertices. This is done in a simple, successive order (see the
+     * Define the vertices of the mesh. This is done in a simple, successive order (see the
      * loop), so the method that sets the triangles will be the complex one,
      * to properly pick the vertices in the right order.
      */
-    private void SetMeshVertices(Mesh mesh) {
+    private void CreateMeshVertices(Mesh mesh) {
         Vector3[] flatVertices = new Vector3[numNodes];
 
         for (int z = 0, v = 0; z < numNodesPerSide; z++) {
             for (int x = 0; x < numNodesPerSide; x++, v++) {
-                flatVertices[v] = nodes[x, z];
+                flatVertices[v] = new Vector3(x * distBetweenNodes, heights[x, z], z * distBetweenNodes);
             }
         }
 
