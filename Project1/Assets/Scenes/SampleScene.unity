@@ -15505,7 +15505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ff3b93309c5fb4db73cd1be5dad6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodesPerUnit: 2
+  nodesPerUnit: 4
 --- !u!23 &1790828560
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15560,8 +15560,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameTime: {fileID: 2034944003}
-  amplitude: 0
-  wavelength: 3
+  amplitude: 0.1
+  wavelength: 2
   frequency: 2
 --- !u!1 &1810952856
 GameObject:

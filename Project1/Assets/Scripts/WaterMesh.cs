@@ -13,12 +13,6 @@ public class WaterMesh : MonoBehaviour
 
     private MeshFilter meshFilter;
 
-	// Use this for initialization
-	void Start ()
-	{
-	    meshFilter = GetComponent<MeshFilter>();
-	}
-
     /**
      * Set transform of a plane. This method sets it to be the center of the terrain in
      * all directions, spanning as far out as the terrain does. This should be used with the
@@ -29,6 +23,14 @@ public class WaterMesh : MonoBehaviour
     {
         int numVerticesPerSide = (int) Mathf.Min(sideLength * nodesPerUnit, maxVerticesPerSide);
         float distBetweenVertices = sideLength / (numVerticesPerSide - 1);
+
+        // Ensure we have a reference to the mesh filter.
+        if (meshFilter == null)
+        {
+            meshFilter = GetComponent<MeshFilter>();
+        }
+
+
         meshFilter.mesh = MeshGenerator.GenerateSquareMesh(numVerticesPerSide, distBetweenVertices);
 
         gameObject.AddComponent<MeshCollider>();
