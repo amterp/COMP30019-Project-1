@@ -20,7 +20,6 @@ public class GenerateTerrain : MonoBehaviour
     // High 'n', and low 'sideLength' -> High resolution, but small terrain.
     // Low 'n' and high 'sideLength' -> Low resolution, but large terrain.
     public float sideLength;
-    public int seed;
     public float maxCornerHeight;
     public float minCornerHeight;
 
@@ -40,7 +39,9 @@ public class GenerateTerrain : MonoBehaviour
     public float highestHeight;
     [HideInInspector]
     public float lowestHeight;
-
+    [HideInInspector]
+    public int seed;
+    
     // Constants.
 
     private int numNodesPerSide;
@@ -118,6 +119,7 @@ public class GenerateTerrain : MonoBehaviour
     private void Initialize()
     {
         Debug.Log("Initializing terrain.");
+        seed = Utilities.GetTimeBasedSeed(8);
         // Grab references to components.
         meshFilter = GetComponent<MeshFilter>();
         terrainColorizer = GetComponent<TerrainColor>();

@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7fcf3b37fb5abe49b20c407fc2bca76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beginEnabled: 0
+  beginEnabled: 1
   invert: 0
 --- !u!1 &97014837
 GameObject:
@@ -1155,7 +1155,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   n: 7
   sideLength: 40
-  seed: 21
   maxCornerHeight: 20
   minCornerHeight: 0
   minNoiseAddition: -4
@@ -1164,6 +1163,7 @@ MonoBehaviour:
   waterPlane: {fileID: 1790828557}
   highestHeight: 0
   lowestHeight: 0
+  seed: 21
 --- !u!4 &204458223
 Transform:
   m_ObjectHideFlags: 0
@@ -15560,9 +15560,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameTime: {fileID: 2034944003}
-  amplitude: 0.1
-  wavelength: 2
-  frequency: 2
+  amplitude: 0.05
+  wavelength: 1.5
+  frequency: 1.5
 --- !u!1 &1810952856
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,5 +33,16 @@ public class Utilities
         // Return the values with 0th and 1st indices being the min
         // and max values respectively.
         return new float[]{minValue, maxValue};
+    }
+
+    /** The seed input field is empty. Default to a "random" seed i.e.
+    * the last 'charLength' digits from current time in ticks where 'charLength'
+    * is the max number of digits for a seed.
+    */
+    public static int GetTimeBasedSeed(int charLength)
+    {
+        long ticks = DateTime.Now.Ticks;
+        long modNum = (long)(Mathf.Pow(10, charLength - 1));
+        return (int)(ticks % modNum);
     }
 }
