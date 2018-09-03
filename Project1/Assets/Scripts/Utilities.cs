@@ -17,15 +17,15 @@ public class Utilities
 
         // Iterate through all values and find the min and max values.
         // Complete this in one pass and return as an array to save time.
-        foreach (float node in values)
+        foreach (float value in values)
         { 
-            if (node < minValue)
+            if (value < minValue)
             {
-                minValue = node;
+                minValue = value;
             } 
-            else if (node > maxValue)
+            else if (value > maxValue)
             {
-                maxValue = node;
+                maxValue = value;
             }
         }
 

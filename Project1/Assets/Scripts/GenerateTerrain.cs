@@ -33,7 +33,7 @@ public class GenerateTerrain : MonoBehaviour
     // by every step to reduce the random value added to each node.
     public float noiseReductionFactor;
 
-    public Transform waterTransform;
+    public GameObject waterPlane;
 
     // Min and max heights of the current terrain.
     [HideInInspector]
@@ -50,26 +50,6 @@ public class GenerateTerrain : MonoBehaviour
     private TerrainColor terrainColorizer;
 
     // Variables.
-
-    // This structure will contain the nodes/vertices for the terrain.
-    // It is a 2D structure which can be queried as e.g. nodes[x, z].
-    // z is used as the second index instead of y to reflect the fact
-    // that the organization of these nodes are in order along the 
-    // x-z axes. i.e. nodes[0, 0] is a node on the origin, and 
-    // nodes[x, z] is the (x+1)th node over on the x axis, and (z+1)th
-    // node over on the z axis.
-    private Node[,] nodes;
-
-    // Variables used as part of the actual diamond-step algorithm
-
-    // Nodes to initialize on the next step of the algorithm.
-    private Node[] verticesToInitialize;
-    // A bool used to keep track of whether we've just performed a 
-    // diamond or square step.
-    private bool onDiamondStep;
-    // A variable used to keep track of the number of nodes over to 
-    // go when looking for neighbors in each step.
-    private int matrixJumpSize;
 
     // Heights of our terrain.
     private float[,] heights;
@@ -99,7 +79,6 @@ public class GenerateTerrain : MonoBehaviour
         numNodes = numNodesPerSide * numNodesPerSide;
 
         // The actual in-Unity distance between nodes.
-        // TODO: the -1 is required to make the size properly match 'sideLength'. That's a bit weird.
         distBetweenNodes = (float)sideLength / (numNodesPerSide - 1);
         Debug.Log(string.Format("numNodesPerSide: {0}, distBetweenNodes: {1}", numNodesPerSide, distBetweenNodes));
 
@@ -107,12 +86,11 @@ public class GenerateTerrain : MonoBehaviour
         heights = DiamondSquare.GetHeights(_seed, n, minCornerHeight, maxCornerHeight, minNoiseAddition,
             maxNoiseAddition,
             noiseReductionFactor);
-        CreateVertices(); // Create the nodes/vertices for the terrain and place them.
 
         // Define the mesh.
         meshFilter.mesh.Clear(); // Clear any existing data.
-        SetMeshVertices(meshFilter.mesh); // Define the vertices for the mesh.
-        SetMeshTriangles(meshFilter.mesh); // Define the triangles for the mesh.
+        CreateMeshVertices(meshFilter.mesh); // Define the vertices for the mesh.
+        MeshGenerator.SetMeshTriangles(meshFilter.mesh, numNodesPerSide); // Define the triangles for the mesh.
 
         // Calculate the mesh's normals and tangents, to allow for proper lighting
         meshFilter.mesh.RecalculateNormals();
@@ -121,14 +99,17 @@ public class GenerateTerrain : MonoBehaviour
 
         // Set the height of the water plane (in the middle of the highest and lowest point of the terrain)
         // Also, get our highest/lowest points of the terrain for later shading
-        float[] minMaxHeights = SetPlaneTransform();
+        float[] minMaxHeights = Utilities.GetMinMaxNodes(heights);
+        lowestHeight = minMaxHeights[0];
+        highestHeight = minMaxHeights[1];
+        waterPlane.GetComponent<WaterMesh>().Initialize(sideLength, lowestHeight, highestHeight);
 
         // Generate a collision mesh, first destroying any existing one.
         Destroy(gameObject.GetComponent<MeshCollider>());
         gameObject.AddComponent<MeshCollider>();
 
         // Initialize terrain colors.
-        terrainColorizer.Initialize(waterTransform, minMaxHeights);
+        terrainColorizer.Initialize(waterPlane.transform, minMaxHeights);
     }
 
     /**
@@ -143,79 +124,19 @@ public class GenerateTerrain : MonoBehaviour
     }
 
     /**
-     * This creates the 2D data structure to contain the nodes for the terrain.
-     * It does *not* initialize the corners.
-     */
-    private void CreateVertices() {
-        nodes = new Node[numNodesPerSide, numNodesPerSide];
-        for (int z = 0; z < numNodesPerSide; z++) {
-            for (int x = 0; x < numNodesPerSide; x++) {
-                nodes[x, z] = new Node(new Vector3(x * distBetweenNodes, heights[x, z], z * distBetweenNodes));
-            }
-        }
-    }
-
-    /**
-     * Set transform of a plane. This method sets it to be the center of the terrain in
-     * all directions, spanning as far out as the terrain does. This should be used with the
-     * water plane. Additionally, it also returns the lowest and highest point of the map as an
-     * array of floats of size 2.
-     */
-    private float[] SetPlaneTransform()
-    {
-        // Get our highest and lowest points on the map
-        float[] minMaxNodes = Utilities.GetMinMaxNodes(heights);
-        highestHeight = minMaxNodes[0];
-        lowestHeight = minMaxNodes[1];
-
-        // Set the water position.
-        float waterHeight = (highestHeight + lowestHeight) / 2;
-        waterTransform.position = new Vector3(sideLength / 2, waterHeight, sideLength / 2);
-
-        // Set the water scale.
-        waterTransform.localScale = new Vector3(sideLength, 1, sideLength);
-
-        return minMaxNodes;
-    }
-
-    /**
-     * Pass the 2D 'nodes' structure as a 1D array into mesh.vertices, to define
-     * the mesh's vertices. This is done in a simple, successive order (see the
+     * Define the vertices of the mesh. This is done in a simple, successive order (see the
      * loop), so the method that sets the triangles will be the complex one,
      * to properly pick the vertices in the right order.
      */
-    private void SetMeshVertices(Mesh mesh) {
+    private void CreateMeshVertices(Mesh mesh) {
         Vector3[] flatVertices = new Vector3[numNodes];
 
         for (int z = 0, v = 0; z < numNodesPerSide; z++) {
             for (int x = 0; x < numNodesPerSide; x++, v++) {
-                flatVertices[v] = nodes[x, z].pos;
+                flatVertices[v] = new Vector3(x * distBetweenNodes, heights[x, z], z * distBetweenNodes);
             }
         }
 
         mesh.vertices = flatVertices;
-    }
-
-    /**
-     * Defines the triangles in the mesh according to the vertices.
-     * This method takes care of referencing each vertex in the correct order
-     * so as to create the correct triangles in the correct direction i.e. clockwise.
-     */
-    private void SetMeshTriangles(Mesh mesh) {
-        int[] triangles = new int[6 * (numNodesPerSide - 1) * (numNodesPerSide - 1)];
-        for (int triangleIndex = 0, vertexIndex = 0, z = 0; z < numNodesPerSide - 1; z++, vertexIndex++) {
-            for (int x = 0; x < numNodesPerSide - 1; x++, triangleIndex += 6, vertexIndex++) {
-                // Each iteration inside this inner loop defines a full square i.e. two triangles.
-                triangles[triangleIndex] = vertexIndex;
-
-                // The following two lines define the triangle vertices that are shared.
-                triangles[triangleIndex + 3] = triangles[triangleIndex + 2] = vertexIndex + 1;
-                triangles[triangleIndex + 4] = triangles[triangleIndex + 1] = vertexIndex + numNodesPerSide;
-
-                triangles[triangleIndex + 5] = vertexIndex + numNodesPerSide + 1;
-            }
-        }
-
-        mesh.triangles = triangles;
     }
 }

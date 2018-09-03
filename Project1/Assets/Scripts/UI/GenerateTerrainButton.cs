@@ -68,13 +68,15 @@ public class GenerateTerrainButton : MonoBehaviour
         terrainScript.Generate(seed);
         SetSeedText(seed);
 
+        Debug.LogFormat("{0} vs {1}", playerCamera.position.y, terrainScript.lowestHeight);
+
         // If the player's current position is under the new terrain, teleport them above the terrain.
-        if (playerCamera.position.y < terrainScript.lowestHeight)
+        if (playerCamera.position.y < terrainScript.highestHeight)
         {
             // Set player camera position to above the top right of the terrain.
             playerCamera.position = new Vector3(
                 terrainScript.sideLength,
-                cameraHeightMultiplier * terrainScript.lowestHeight, // 20% above the maximum height.
+                cameraHeightMultiplier * terrainScript.highestHeight, // 20% above the maximum height.
                 terrainScript.sideLength
             );
 
