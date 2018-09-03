@@ -30,9 +30,12 @@ public class WaterMesh : MonoBehaviour
             meshFilter = GetComponent<MeshFilter>();
         }
 
+        // Destroy any existing mesh or colliders.
+        meshFilter.mesh.Clear();
+        Destroy(GetComponent<MeshCollider>());
 
+        // Generate new mesh and collider.
         meshFilter.mesh = MeshGenerator.GenerateSquareMesh(numVerticesPerSide, distBetweenVertices);
-
         gameObject.AddComponent<MeshCollider>();
 
         // Set the water position.
