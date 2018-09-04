@@ -122,12 +122,8 @@ public class GenerateTerrainButton : MonoBehaviour
 
         if (seed.Length == 0)
         {
-            // The seed input field is empty. Default to a "random" seed i.e.
-            // the last X digits from current time in ticks where X is the max
-            // number of digits for a seed.
-            long ticks = DateTime.Now.Ticks;
-            long modNum = (long) (Mathf.Pow(10, seedInputField.characterLimit - 1));
-            return (int) (ticks % modNum);
+            // Get a "random" seed.
+            return Utilities.GetTimeBasedSeed(seedInputField.characterLimit);
         }
         else
         {
