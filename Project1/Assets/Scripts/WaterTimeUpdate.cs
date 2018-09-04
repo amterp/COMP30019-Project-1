@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class WaterTimeUpdate : MonoBehaviour {
     public GameTime gameTime;
-    public float amplitude = 0.5f;
-    public float wavelength = 3.0f;
-    public float frequency = 2.0f;
+    public float amplitude = 0.2f;
+    public float wavelength = 1.0f;
+    public float frequency = 1.0f;
 
     private Renderer waterMaterial;
     
