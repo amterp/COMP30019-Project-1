@@ -2,17 +2,24 @@ Alexander Terp
 Student ID: 828791
 Contributions:
 	- Broke specification down into chunk-sized GitHub issues.
+	- Implemented mesh generation for both terrain and wave plane.
 	- Implemented diamond-square algorithm for terrain generation.
 	- Implemented camera / flying vehicle as specified.
+	- Implemented camera/terrain collision as specified.
 	- Implemented sun model and gradual sun/lighting movement.
 	- Extra: Added "extra" issues onto GitHub that would be fun to add to the project.
 	- Extra: Enhanced camera control with "sprinting" ability.
 	- Extra: Implemented UI support with "ESC" key.
-	- Extra: Implemented a functional Generate New Terrain button to the UI.
+	- Extra: Implemented a functional Generate New Terrain button to the UI with parameters.
 	- Extra: Implemented application exit button.
-	- Extra: Implemented full day/night cycle.
+	- Extra: Implemented full day/night cycle and UI elements for time control.
 	- Extra: Implemented fov slider.
 
 Samuel Xu
 Student ID: 
 Contributions:
+	- Implemented terrain coloring with snow, grey mountain, grass, and sand.
+	- Implemented Gerstner waves.
+	- Implemented Phong lighting/shading for terrain and water.
+	- Extra: Implemented UI elements to tweak terrain coloring.
+	- Extra: Implemented UI elements to tweak wave settings.
