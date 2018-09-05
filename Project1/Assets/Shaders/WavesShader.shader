@@ -8,8 +8,8 @@
 		_Amplitude ("Amplitude", Range(0,2)) = 0.2
 		_Frequency ("Frequency", Range(0,5)) = 1
 		_Wavelength ("Wavelength", Range(0,10)) = 2
-		_Tide ("Tide Amplitude", Range(0,2)) = 0.15
-		_TideFrequency ("Tide Freuquency", Range(0,1)) = 0.2
+		_TideAmplitude ("Tide Amplitude", Range(0,2)) = 0.15
+		_TideFrequency ("Tide Frequency", Range(0,1)) = 0.2
 		_Direction ("Wave Direction", Vector) = (1,2,0,0)
 		_GameTime ("GameTime", float) = 0
 		_fAtt("F Attenuation", range(0,1)) = 1
@@ -54,7 +54,7 @@
 			float4 _MainTex_ST;
 			half _Amplitude;
 			half _Frequency;
-			float _Tide;
+			float _TideAmplitude;
 			float _TideFrequency;
 			float4 _Tint;
 			half _Wavelength;
@@ -81,7 +81,7 @@
 				v.position.x += d.x * cos(wave) * flat_a * 0.5;
 				v.position.z += d.y * cos(wave) * flat_a * 0.5;
 				// Add our overall tide behaviour
-				v.position.y += sin((v.position.xy) + (_GameTime * _TideFrequency)) * _Tide;
+				v.position.y += sin((v.position.xy) + (_GameTime * _TideFrequency)) * _TideAmplitude;
 
 				// Prepare Phong model components
 				float4 worldVertex = mul(unity_ObjectToWorld, v.position);
