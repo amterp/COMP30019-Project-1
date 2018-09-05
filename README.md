@@ -21,7 +21,7 @@ We utilize procedural meshes in the implementation of our terrain. The steps for
 We then utilize a custom shader that performs Phong illumination and shading while also rendering the colors of the vertices to give the terrain height-based coloration.
 
 ### Waves shader:
-Additionally, we utilize a custom shader for the waves. This shader implements Gerstner-style waves and contains two octaves i.e. large waves and small waves on top of each other. Vertices are properly displaced, as specified.
+Additionally, we utilize a custom shader for the waves. This shader implements Gerstner-style waves and contains two octaves i.e. large waves (named in our project as "tides") and small waves on top of each other. This was calculated with a sin function on the y axis, and a cos function on the x axis, which sum together to produce a wave 'rolling' motion. This smaller wave is then combined with a wave direction vector, which allows the user to input a direction for the wave. Vertices are displaced in the shader and not in a script, as specified. 
 
 ### Terrain resolution:
 The terrain, on default, has n set to equal 7 i.e. it has a total of (2^7 + 1)^2 = 16,641 vertices. The max that a single mesh in Unity allows is around 65,000. However, if we increase n to 8, we get (2^8 + 1)^2 = 66,049 vertices, which is slightly over the limit. This causes some artifacting, and so we limit n to be [1, 7].
