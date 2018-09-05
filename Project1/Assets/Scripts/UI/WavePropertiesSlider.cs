@@ -10,9 +10,14 @@ public class WavePropertiesSlider : MonoBehaviour
     public Slider amplitudeSlider;
     public Slider frequencySlider;
     public Slider wavelengthSlider;
+    public Slider tideAmplitudeSlider;
+    public Slider tideFrequencySlider;
+
     public Text amplitudeText;
     public Text frequencyText;
     public Text wavelengthText;
+    public Text tideAmplitudeText;
+    public Text tideFrequencyText;
 
     // Use this for initialization
     void Start()
@@ -21,6 +26,8 @@ public class WavePropertiesSlider : MonoBehaviour
         amplitudeSlider.onValueChanged.AddListener(OnAmplitudeChange);
         frequencySlider.onValueChanged.AddListener(OnFrequencyChange);
         wavelengthSlider.onValueChanged.AddListener(OnWavelengthChange);
+        tideAmplitudeSlider.onValueChanged.AddListener(OnTideAmplitudeChange);
+        tideFrequencySlider.onValueChanged.AddListener(OnTideFrequencyChange);
     }
 
     // Update is called once per frame
@@ -35,26 +42,36 @@ public class WavePropertiesSlider : MonoBehaviour
      */
     private void OnAmplitudeChange(float newValue)
     {
-        // Set our water height color. If it goes higher than the mountain height, then update that too.
         water.amplitude = newValue;
-        UpdateHeightText(amplitudeText, newValue);
+        UpdateValueText(amplitudeText, newValue);
     }
     private void OnFrequencyChange(float newValue)
     {
-        // Set our mountain height color. If it goes higher than the snow height, then update that too.
         water.frequency = newValue;
-        UpdateHeightText(frequencyText, newValue);
+        UpdateValueText(frequencyText, newValue);
     }
     private void OnWavelengthChange(float newValue)
     {
         water.wavelength = newValue;
-        UpdateHeightText(wavelengthText, newValue);
+        UpdateValueText(wavelengthText, newValue);
+    }
+
+    private void OnTideFrequencyChange(float newValue)
+    {
+        water.tideFrequency = newValue;
+        UpdateValueText(tideFrequencyText, newValue);
+    }
+
+    private void OnTideAmplitudeChange(float newValue)
+    {
+        water.tideAmplitude = newValue;
+        UpdateValueText(tideAmplitudeText, newValue);
     }
 
     /**
-     * Update the text that displays the current heights.
+     * Update the text that displays the current values.
      */
-    private void UpdateHeightText(Text updateText, float value)
+    private void UpdateValueText(Text updateText, float value)
     {
         updateText.text = string.Format("{0}", System.Math.Round(value, 2));
     }
