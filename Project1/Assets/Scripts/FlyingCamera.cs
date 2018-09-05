@@ -43,11 +43,25 @@ public class FlyingCamera : MonoBehaviour {
         }
 
         // Get values for how much the axes have moved this frame.
-        float xRotationAmount = Input.GetAxis("Mouse X") * xLookSensitivity;
-        float yRotationAmount = Input.GetAxis("Mouse Y") * yLookSensitivity;
+        float deltaYaw = Input.GetAxis("Mouse X") * xLookSensitivity;
+        float deltaPitch = Input.GetAxis("Mouse Y") * yLookSensitivity;
 
-        // Translate those values and rotate the camera accordingly.
-        transform.localEulerAngles += new Vector3(-yRotationAmount, xRotationAmount, 0) * Time.deltaTime;
+        // Translate those values and clamp camera rotation on the x axis.
+        Vector3 rotationAmount = new Vector3(-deltaPitch, deltaYaw, 0) * Time.deltaTime;
+
+        if (rotationAmount.x + transform.localEulerAngles.x > 90
+            && rotationAmount.x + transform.localEulerAngles.x < 180)
+        {
+            rotationAmount.x = 90 - transform.localEulerAngles.x;
+        } 
+        else if (rotationAmount.x + transform.localEulerAngles.x < 270
+                   && rotationAmount.x + transform.localEulerAngles.x > 180)
+        {
+            rotationAmount.x = 270 - transform.localEulerAngles.x;
+        }
+
+        // Rotate the camera properly.
+        transform.localEulerAngles += rotationAmount;
     }
 
     /**

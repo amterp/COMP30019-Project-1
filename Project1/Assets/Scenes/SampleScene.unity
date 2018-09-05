@@ -1466,7 +1466,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.1511
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &240373538
 Transform:
@@ -1971,7 +1971,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 5000
+  far clip plane: 50000
   field of view: 90
   orthographic: 0
   orthographic size: 5
@@ -5788,8 +5788,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1027000825}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -22}
-  m_LocalScale: {x: 50, y: 50, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -6000}
+  m_LocalScale: {x: 490, y: 490, z: 1}
   m_Children: []
   m_Father: {fileID: 1282000868}
   m_RootOrder: 1
@@ -11428,9 +11428,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1196283369}
-  - component: {fileID: 1196283373}
   - component: {fileID: 1196283372}
   - component: {fileID: 1196283371}
+  - component: {fileID: 1196283373}
   - component: {fileID: 1196283370}
   m_Layer: 5
   m_Name: WavePropertySliders
@@ -15130,8 +15130,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1725111787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -22}
-  m_LocalScale: {x: 50, y: 50, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -6000}
+  m_LocalScale: {x: 500, y: 500, z: 1}
   m_Children: []
   m_Father: {fileID: 1920155317}
   m_RootOrder: 1
@@ -15560,9 +15560,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameTime: {fileID: 2034944003}
-  amplitude: 0.05
-  wavelength: 1.5
-  frequency: 1.5
+  amplitude: 0.06
+  wavelength: 1.521
+  frequency: 2.031
 --- !u!1 &1810952856
 GameObject:
   m_ObjectHideFlags: 0
