@@ -40,5 +40,5 @@ which affected the specified features in some way.
 - We implemented an in-game time clock. This clock goes from 0 seconds to 86399 seconds, or 11:59:59 PM, before ticking over and wrapping back to 0. The aforementioned /night cycle is tied to this clock, which goes at real time. This means that, if left at default speed, it'd take 24 real hours to simulate a day/night cycle. However, both the time and time speed can be set in the top left of the UI. Also, the waves are tied to this in-game clock. Therefore, if you speed up time,	the oscillation of the waves speed up too.
 
 ## Disclaimers:
-Water texture provided by SimplyBackgrounds @ Deviant Art
+Water texture provided by SimplyBackgrounds @ Deviant Art  
 https://www.deviantart.com/simplybackgrounds/art/Water-Texture-49283686
