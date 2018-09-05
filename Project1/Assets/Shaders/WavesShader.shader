@@ -5,7 +5,7 @@
 		_MainTex ("Texture", 2D) = "white" {}
 		_Tint ("Color", Color) = (1,1,1,1)
 		_Brightness ("Brightness", Range(0,1)) = 0.8
-		_Amplitude ("Amplitude", Range(0,2)) = 0.36
+		_Amplitude ("Amplitude", Range(0,2)) = 0.06
 		_Frequency ("Frequency", Range(0,5)) = 2
 		_Wavelength ("Wavelength", Range(0,10)) = 1.5
 		_TideAmplitude ("Tide Amplitude", Range(0,2)) = 0.1
