@@ -77,7 +77,7 @@ Shader "Custom/TerrainHeightShader" {
 
 				// Calculate specular reflections
 				float3 V = normalize(_WorldSpaceCameraPos - v.worldVertex.xyz);
-				float3 R = normalize(2 * LdotN*interpNormal - L);
+				float3 R = normalize(2 * LdotN * interpNormal - L);
 				float3 spe = _fAtt * _PointLightColor.rgb * _Ks * pow(saturate(dot(V, R)), _specN);
 
 				float4 result = float4(amb.rgb, 1) + float4(dif.rgb, 1) + float4(spe.rgb, 1);
