@@ -5,11 +5,11 @@ Shader "Custom/TerrainHeightShader" {
 	Properties {
 		_MainTex ("Texture", 2D) = "white" {}
 		_fAtt("F Attenuation", range(0,1)) = 1
-		_Kd("Kd", range(0,1)) = 1
-		_Ka("Ka", range(0,1)) = 1
-		_Ks("Ks", range(0,1)) = 1
-		_Brightness("Brightness", range(0,1)) = 1
-		_specN("specN", range(0,5)) = 1
+		_Kd("Diffuse Component Intensity", range(0,1)) = 1
+		_Ka("Ambient Component Intensity", range(0,1)) = 1
+		_Ks("Specular Component Intensity", range(0,1)) = 0.8
+		_Brightness("Brightness", range(0,1)) = 0.9
+		_specN("specN", range(0,5)) = 0.8
 		_PointLightColor("Point Light Color", Color) = (1, 1, 1)
 	}
 
@@ -63,7 +63,7 @@ Shader "Custom/TerrainHeightShader" {
 
 			float4 Frag (Interpolators v) : SV_TARGET {
 
-				// This follows the Phong shader as provided in Tutorial
+				// This is inspired by the Phong shader as provided in Tutorial
 				float3 interpNormal = normalize(v.worldNormal);
 
 				// Calculate ambient RGB intensities

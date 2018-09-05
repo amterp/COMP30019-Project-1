@@ -4,13 +4,13 @@
 	{
 		_MainTex ("Texture", 2D) = "white" {}
 		_Tint ("Color", Color) = (1,1,1,1)
-		_Brightness ("Brightness", Range(0,1)) = 1
-		_Amplitude ("Amplitude", Range(0,2)) = 0.2
-		_Frequency ("Frequency", Range(0,5)) = 1
-		_Wavelength ("Wavelength", Range(0,10)) = 2
-		_TideAmplitude ("Tide Amplitude", Range(0,2)) = 0.15
-		_TideFrequency ("Tide Frequency", Range(0,1)) = 0.2
-		_Direction ("Wave Direction", Vector) = (1,2,0,0)
+		_Brightness ("Brightness", Range(0,1)) = 0.8
+		_Amplitude ("Amplitude", Range(0,2)) = 0.06
+		_Frequency ("Frequency", Range(0,5)) = 2
+		_Wavelength ("Wavelength", Range(0,10)) = 1.5
+		_TideAmplitude ("Tide Amplitude", Range(0,2)) = 0.1
+		_TideFrequency ("Tide Frequency", Range(0,1)) = 0.5
+		_Direction ("Wave Direction", Vector) = (1,1,0,0)
 		_GameTime ("GameTime", float) = 0
 		_fAtt("F Attenuation", range(0,1)) = 1
 		_Kd("Diffuse Component Intensity", range(0,1)) = 1
@@ -98,7 +98,7 @@
 
 			float4 Frag(Interpolators v) : SV_TARGET{
 
-				// This follows the Phong shader as provided in Tutorial
+				// This is inspired by the Phong shader as provided in Tutorial
 				float3 interpNormal = normalize(v.worldNormal);
 
 				// Calculate ambient RGB intensities
