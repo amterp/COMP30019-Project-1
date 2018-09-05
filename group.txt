@@ -16,10 +16,13 @@ Contributions:
 	- Extra: Implemented fov slider.
 
 Samuel Xu
-Student ID: 
+Student ID: 835273
 Contributions:
 	- Implemented terrain coloring with snow, grey mountain, grass, and sand.
 	- Implemented Gerstner waves.
 	- Implemented Phong lighting/shading for terrain and water.
 	- Extra: Implemented UI elements to tweak terrain coloring.
 	- Extra: Implemented UI elements to tweak wave settings.
+	- Extra: Implemented an adaptive terrain colouring utility which sets the colours based on the height of water and highest point of the map.
+	- Extra: Implemented a wave system which moves according to the specified in-game controlled time.
+	
