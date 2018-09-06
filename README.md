@@ -32,6 +32,15 @@ The camera has been implemented as specified. The user can intuitively pitch, ya
 ### Lighting / day/night cycle:
 We've implemented a full day/night cycle using two directional lights. The sun and moon are modeled by flattened spheres, and the night stars are generated via a particle system. As time progresses, these rotate, and lighting is changed accordingly as well. Additional details about the day/night cycle addressed in the "Extras" section.
 
+### Performance / FPS Lock
+The simulation runs well on the devices we have developed on. Below are some benchmarks for our developer devices:  
+**Desktop @ 1080p: i7-3930K, AMD Radeon HD 7950, 8 GB DDR3 RAM**: 110 FPS average  
+**Desktop @ 1080p: i7-6800K, Nvidia GTX 1080 Ti, 32 GB DDR4 RAM**: 80 FPS average  
+**Laptop @ 720p: i5-3437U, Intel HD Graphics 4000, 8 GB DDR3 RAM**: 50 FPS average  
+**Laptop @ 1080p: i5-7300U, Intel HD Graphics 620, 8 GB DDR4 RAM**: 85 FPS average  
+
+However, the lab computers that the simulation is supposed to run on perform far worse. That's to be expected as they are only able to run a completely empty Unity scene at an average FPS of 60. Because we are concerned with the performance on weaker devices, we decided to lock our application to 40 FPS to maintain a consistent FPS as required in the spec. We believe 40 to be a fair compromise between usability and required computer power.
+
 ### Extras:
 We enjoyed the project so much that we wanted to add some additional features, some of 
 which affected the specified features in some way.

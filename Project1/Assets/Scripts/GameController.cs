@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public int targetFrameRate;
+    public bool enableVSync;
+
     // Public fields that will not appear in the inspector.
 
     // An event that will be triggered each time the UI is toggled.
@@ -15,8 +18,14 @@ public class GameController : MonoBehaviour
     [HideInInspector]
     public static bool uiEnabled = false;
 
+    void Awake()
+    {
+        QualitySettings.vSyncCount = enableVSync ? 1 : 0;
+        Application.targetFrameRate = targetFrameRate;
+    }
+
     // Update is called once per frame
-	void Update ()
+    void Update ()
 	{
 	    CheckUiToggle();
 	}
