@@ -34,7 +34,7 @@ We've implemented a full day/night cycle using two directional lights. The sun a
 
 ### Performance / FPS Lock
 The simulation runs well on the devices we have developed on. Below are some benchmarks for our developer devices:  
-**Desktop @ 1080p: i7-3930K, AMD Radeon HD 7950 HD, 8 GB DDR3 RAM**: 110 FPS average  
+**Desktop @ 1080p: i7-3930K, AMD Radeon HD 7950, 8 GB DDR3 RAM**: 110 FPS average  
 **Desktop @ 1080p: i7-6800K, Nvidia GTX 1080 Ti, 32 GB DDR4 RAM**: 80 FPS average  
 **Laptop @ 720p: i5-3437U, Intel HD Graphics 4000, 8 GB DDR3 RAM**: 50 FPS average  
 **Laptop @ 1080p: i5-7300U, Intel HD Graphics 620, 8 GB DDR4 RAM**: 85 FPS average  
